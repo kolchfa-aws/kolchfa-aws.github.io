@@ -1,0 +1,20 @@
+{"0": {
+    "doc": 404,
+    "title": "Oops, this isn’t the page you’re looking for.",
+    "content": "Maybe our home page or one of the commonly visited pages below will help. If you need further support, please use the feedback feature on the right side of the screen to get in touch. | Quickstart | Installing OpenSearch | OpenSearch Dashboards | Query DSL | API Reference | . ",
+    "url": "https://kolchfa-aws.github.io/404.html#oops-this-isnt-the-page-youre-looking-for",
+    "relUrl": "/404.html#oops-this-isnt-the-page-youre-looking-for"
+  },"1": {
+    "doc": 404,
+    "title": 404,
+    "content": " ",
+    "url": "https://kolchfa-aws.github.io/404.html",
+    "relUrl": "/404.html"
+  },"2": {
+    "doc": "Home",
+    "title": "Home",
+    "content": "OpenSearch Documentation Learn to use OpenSearch, the highly scalable and extensible open-source software suite for search, analytics, observability, and other data-intensive applications. Contribute . Explore OpenSearch documentation . OpenSearch and OpenSearch Dashboards . Learn how to power up your search . Documentation &#x2192; Data Prepper . Prepare your data for OpenSearch . Documentation &#x2192; Clients . OpenSearch in your programming language . Documentation &#x2192; Benchmark . Track OpenSearch performance . Documentation &#x2192; ",
+    "url": "https://kolchfa-aws.github.io/",
+    "relUrl": "/"
+  }
+}
