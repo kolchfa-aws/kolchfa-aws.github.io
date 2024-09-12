@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link type="application/atom+xml" rel="alternate" href="https://kolchfa-aws.github.io/feed.xml" title="OpenSearch" />
+  
+
+
+
+
+
+
+
+
+
+<!-- LOGIC to pull the correct category image onto blog posts that do not have an image  -->
+
+  <!-- If there is a category, pull the correct category and fetch the generic image for that category  -->
+  
+    
+    <!-- Category validation // if invalid category, assign the default category to pull that image -->
+    
+    
+
+    
+
+  
+
+  
+  
+
+
+
+
+
+<meta name="ROBOTS" content="ALL" />
+<meta name="MSSmartTagsPreventParsing" content="true" />    <!-- MSSmartTags... turns off internet explorer smart tags that are outdated and no longer supported.  -->
+<meta name="msapplication-TileColor" content="#113228">
+<meta name="msapplication-TileImage" content="/img/icon-tile.png"> 
+<meta name="meta_keywords" content="open-source, search, opensearch" />
+<meta name="description" content="OpenSearch is a community-driven, Apache 2.0-licensed open source search and analytics suite that makes it easy to ingest, search, visualize, and analyze data." />
+<meta name="meta_description" content="OpenSearch is a community-driven, Apache 2.0-licensed open source search and analytics suite that makes it easy to ingest, search, visualize, and analyze data." />
+
+<!-- TWITTER -->
+<meta name="twitter:title" content="Opensearch Dashboards 1.3.14 Docker Arm64" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="OpenSearch is a community-driven, Apache 2.0-licensed open source search and analytics suite that makes it easy to ingest, search, visualize, and analyze data." />
+<meta name="twitter:image" content="https://kolchfa-aws.github.io/assets/media/blog-category-images/OpenSearch_WebGraphic_Generic-02.png" />
+<meta name="twitter:site" content="@OpenSearchProj" />
+
+<!-- OG: OPENGRAPH SHARING -->
+<meta property="og:image" content="https://kolchfa-aws.github.io/assets/media/blog-category-images/OpenSearch_WebGraphic_Generic-02.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="1200" />
+<meta property="og:image:width" content="675" />
+<meta property="og:description" content="OpenSearch is a community-driven, Apache 2.0-licensed open source search and analytics suite that makes it easy to ingest, search, visualize, and analyze data." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://kolchfa-aws.github.io/artifacts/opensearch-dashboards/opensearch-dashboards-1-3-14-docker-arm64.html" />
+<meta property="og:title" content="Opensearch Dashboards 1.3.14 Docker Arm64" />
+<meta property="og:site_name" content="OpenSearch" />
+
+
+
+
+
+
+
+
+
+
+  <title> Opensearch Dashboards 1.3.14 Docker Arm64 &middot;  OpenSearch</title>
+
+  <!-- Favicons -->
+  
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="icon" sizes="192x192" href="/assets/img/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico">
+  <link rel="canonical" href="https://kolchfa-aws.github.io/artifacts/opensearch-dashboards/opensearch-dashboards-1-3-14-docker-arm64.html">
+
+  <meta name="msapplication-TileColor" content="#113228">
+  <meta name="msapplication-TileImage" content="/img/icon-tile.png">
+
+  <link rel="stylesheet"  href="/assets/css/bootstrap.min.css">
+<script src="/assets/js/bootstrap.js"></script>
+  
+  <link rel="stylesheet" href="/assets/css/output.css" >
+
+
+
+  
+  <script src="/assets/js/lib/modernizr.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQV14XK08F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQV14XK08F');
+  </script>
+  
+</head>
+<body id="" class=" ">
+
+<div role="banner" id="top">
+  <div class="navigation-container">
+      <a class="navigation-container--logo" href="/">
+          OpenSearch
+          
+        <svg width="200" height="39" viewBox="0 0 200 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_723_1352)">
+                <path d="M33.1921 14.2473C32.5203 14.2473 31.9757 14.7919 31.9757 15.4638C31.9757 25.4739 23.861 33.5886 13.8509 33.5886C13.179 33.5886 12.6344 34.1332 12.6344 34.8051C12.6344 35.4769 13.179 36.0215 13.8509 36.0215C25.2046 36.0215 34.4086 26.8175 34.4086 15.4638C34.4086 14.7919 33.864 14.2473 33.1921 14.2473Z" fill="#005EB8"/>
+                <path d="M25.8502 22.0429C27.02 20.1346 28.1514 17.5901 27.9288 14.0279C27.4677 6.64898 20.7844 1.05116 14.4735 1.65781C12.0029 1.8953 9.46604 3.90914 9.69142 7.51629C9.78938 9.08382 10.5566 10.009 11.8035 10.7203C12.9902 11.3973 14.515 11.8262 16.2435 12.3123C18.3313 12.8996 20.7532 13.5592 22.6146 14.9309C24.8455 16.5749 26.3705 18.4807 25.8502 22.0429Z" fill="#003B5C"/>
+                <path d="M2.10678 9.13989C0.936968 11.0482 -0.194358 13.5927 0.0282221 17.1549C0.489286 24.5338 7.17263 30.1316 13.4835 29.525C15.9541 29.2875 18.491 27.2737 18.2656 23.6665C18.1676 22.099 17.4004 21.1738 16.1535 20.4625C14.9668 19.7855 13.442 19.3566 11.7135 18.8705C9.6257 18.2832 7.20382 17.6236 5.34245 16.2519C3.11154 14.6079 1.58652 12.7021 2.10678 9.13989Z" fill="#005EB8"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M194.892 16.6666V29.0322H199.731V15.5914C199.731 13.1143 199.247 11.243 198.279 9.97369C197.311 8.69203 195.851 8.0645 193.952 8.0645C191.891 8.0645 190.24 9.26923 189.247 11.2903H188.979C189.052 10.2468 189.118 9.64901 189.167 9.21251C189.217 8.76235 189.247 8.48369 189.247 8.0645V0.268799H184.409V29.0322H189.516V19.086C189.516 16.8554 189.591 15.2051 190.05 14.022C190.509 12.8266 191.31 12.2289 192.452 12.2289C193.978 12.2289 194.892 13.6473 194.892 16.6666ZM124.652 27.5424C125.959 26.1907 126.613 24.2439 126.613 21.7018C126.613 20.1144 126.255 18.7008 125.538 17.4607C124.834 16.2207 123.583 15.0055 121.785 13.815C120.453 12.947 119.516 12.1719 118.975 11.4899C118.447 10.8079 118.183 10.008 118.183 9.09041C118.183 8.16036 118.403 7.42875 118.844 6.89552C119.296 6.34987 119.937 6.07708 120.767 6.07708C121.522 6.07708 122.225 6.21348 122.879 6.48627C123.545 6.75912 124.18 7.06912 124.784 7.41633L126.481 3.36136C124.532 2.19571 122.502 1.61288 120.39 1.61288C118.177 1.61288 116.411 2.29491 115.091 3.65897C113.783 5.02303 113.13 6.87074 113.13 9.20203C113.13 10.4172 113.293 11.4837 113.62 12.4013C113.959 13.319 114.431 14.1498 115.034 14.8939C115.65 15.6255 116.549 16.3943 117.731 17.2004C119.089 18.118 120.063 18.955 120.654 19.7114C121.245 20.4555 121.54 21.2801 121.54 22.1854C121.54 23.103 121.289 23.8284 120.786 24.3616C120.296 24.8949 119.56 25.1615 118.58 25.1615C116.857 25.1615 114.965 24.498 112.903 23.1712V28.1748C114.588 29.1049 116.631 29.5699 119.032 29.5699C121.483 29.5699 123.357 28.8941 124.652 27.5424ZM129.932 26.8142C131.441 28.6513 133.498 29.5699 136.103 29.5699C138.335 29.5699 140.248 29.092 141.844 28.1362V24.0585C140.149 25.064 138.491 25.5667 136.87 25.5667C135.598 25.5667 134.601 25.1198 133.878 24.2261C133.155 23.32 132.833 22.0108 132.796 20.1613H142.742V17.4486C142.742 14.482 142.088 12.1794 140.778 10.5409C139.469 8.88998 137.681 8.0645 135.411 8.0645C132.98 8.0645 131.085 9.02649 129.726 10.9505C128.368 12.8745 127.688 15.5495 127.688 18.9755C127.688 22.3518 128.436 24.9647 129.932 26.8142ZM133.616 13.0172C134.077 12.2601 134.663 11.8815 135.374 11.8815C136.134 11.8815 136.733 12.2725 137.169 13.0545C137.605 13.8365 137.878 15.1523 137.903 16.6666H132.796C132.87 15.0902 133.155 13.762 133.616 13.0172ZM154.839 29.0322L154.032 26.3441H153.763C153.023 27.5584 152.309 28.4236 151.518 28.8821C150.727 29.3406 149.728 29.5699 148.523 29.5699C146.977 29.5699 145.759 28.9999 144.867 27.8599C143.988 26.7198 143.548 25.1337 143.548 23.1015C143.548 20.9206 144.151 19.3035 145.357 18.2503C146.575 17.1846 148.39 16.596 150.802 16.4845L153.59 16.373V14.886C153.59 12.9529 152.742 11.9864 151.047 11.9864C149.791 11.9864 148.346 12.4697 146.713 13.4362L144.98 10.0162C147.066 8.71504 149.298 8.0645 151.747 8.0645C153.97 8.0645 155.695 8.69649 156.85 9.96041C158.018 11.2119 158.602 12.9901 158.602 15.2949V29.0322H154.839ZM150.576 25.7037C151.493 25.7037 152.222 25.301 152.761 24.4956C153.314 23.6777 153.59 22.5935 153.59 21.2428V19.4956L152.046 19.57C150.903 19.6319 150.061 19.9541 149.521 20.5365C148.994 21.1189 148.73 21.9863 148.73 23.1387C148.73 24.8487 149.345 25.7037 150.576 25.7037ZM170.968 8.46772C170.392 8.28224 169.536 8.0645 168.937 8.0645C168.092 8.0645 167.351 8.34267 166.715 8.89907C166.078 9.45547 165.592 9.99208 165.054 11.2903H164.785L163.979 8.60213H160.215V29.0322H165.303V18.2796C165.303 16.4744 165.417 15.3098 166.054 14.3701C166.69 13.4181 167.602 12.9421 168.789 12.9421C169.34 12.9421 169.819 13.0484 170.161 13.172L170.968 8.46772ZM178.495 29.5699C176.045 29.5699 174.169 28.7516 172.889 26.9517C171.608 25.1518 170.968 22.5079 170.968 19.0199C170.968 15.3705 171.571 12.6458 172.777 10.846C173.997 9.04606 175.816 8.0645 178.352 8.0645C179.115 8.0645 179.974 8.25783 180.811 8.48127C181.648 8.70471 182.668 8.98654 183.333 9.40858L181.661 13.3037C180.639 12.6955 179.734 12.3914 178.946 12.3914C177.899 12.3914 177.142 12.9437 176.674 14.0485C176.219 15.1408 175.991 16.7855 175.991 18.9826C175.991 21.13 176.219 22.7375 176.674 23.805C177.13 24.8601 177.875 25.3877 178.909 25.3877C180.14 25.3877 181.427 24.9532 182.769 24.0843V28.4413C181.476 29.2481 180.058 29.5699 178.495 29.5699Z" fill="#003B5C"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M57.9446 25.9475C59.6376 23.5326 60.4839 20.0774 60.4839 15.582C60.4839 11.0866 59.6436 7.63763 57.9635 5.23513C56.2828 2.82024 53.8678 1.61279 50.7187 1.61279C47.5322 1.61279 45.0924 2.81405 43.3995 5.21655C41.7067 7.60666 40.8602 11.0495 40.8602 15.5448C40.8602 20.0774 41.7067 23.5511 43.3995 25.966C45.0924 28.3685 47.5197 29.5698 50.6814 29.5698C53.8307 29.5698 56.2516 28.3624 57.9446 25.9475ZM47.2272 22.6595C46.443 21.0371 46.0509 18.678 46.0509 15.582C46.0509 12.4736 46.443 10.1145 47.2272 8.50451C48.0114 6.8822 49.1752 6.07107 50.7187 6.07107C53.7559 6.07107 55.2747 9.24134 55.2747 15.582C55.2747 21.9226 53.7435 25.093 50.6814 25.093C49.1628 25.093 48.0114 24.2818 47.2272 22.6595ZM68.9172 29.031C69.607 29.4293 70.3495 29.5698 71.2366 29.5698C73.1344 29.5698 74.6774 28.6701 75.7742 26.7532C76.871 24.8365 77.4194 22.1915 77.4194 18.8184C77.4194 15.3955 76.8893 12.7506 75.8296 10.8836C74.7699 9.00414 73.3038 8.06441 71.4307 8.06441C69.4839 8.06441 67.9581 9.22403 66.9355 11.2902H66.6667L65.8602 8.60204H62.0968V38.4408H66.9355V29.5698C66.9355 29.2213 66.864 28.0367 66.6667 26.344H66.9355C67.3387 27.5537 68.2393 28.6203 68.9172 29.031ZM67.6785 13.6468C68.1102 12.7382 68.8059 12.2839 69.7672 12.2839C70.6667 12.2839 71.3258 12.8191 71.7452 13.8895C72.1764 14.9599 72.392 16.578 72.392 18.7438C72.392 23.1499 71.5296 25.353 69.8043 25.353C68.8059 25.353 68.0914 24.8302 67.6602 23.7847C67.229 22.7391 67.0135 21.0713 67.0135 18.7811V18.1276C67.0382 16.0366 67.2597 14.543 67.6785 13.6468ZM86.9097 29.5698C84.3043 29.5698 82.2473 28.6512 80.7387 26.8141C79.2425 24.9646 78.4946 22.3517 78.4946 18.9754C78.4946 15.5494 79.1742 12.8744 80.5328 10.9504C81.892 9.0264 83.7866 8.06441 86.2178 8.06441C88.4871 8.06441 90.2758 8.88989 91.585 10.5408C92.8941 12.1793 93.5484 14.4819 93.5484 17.4485V20.1612H83.6022C83.6398 22.0107 83.9613 23.3199 84.6844 24.226C85.4075 25.1197 86.4049 25.5666 87.6764 25.5666C89.2973 25.5666 90.9554 25.0639 92.6506 24.0584V28.1361C91.0549 29.0919 89.1414 29.5698 86.9097 29.5698ZM86.1807 11.8814C85.4699 11.8814 84.8839 12.26 84.4226 13.0171C83.9613 13.7619 83.6769 15.0901 83.6022 16.6666H88.7097C88.685 15.1522 88.4118 13.8364 87.9758 13.0544C87.5393 12.2724 86.9409 11.8814 86.1807 11.8814ZM105.645 16.6666V29.0321H110.484V15.6983C110.484 13.2036 110.012 11.3076 109.069 10.0103C108.138 8.71306 106.729 8.06441 104.842 8.06441C103.726 8.06441 102.751 8.33881 101.919 8.88769C101.088 9.42403 100.447 10.3297 100 11.2902H99.7312L99.0592 8.60204H95.1613V29.0321H100.269V19.2203C100.269 16.6882 100.362 14.9624 100.859 13.9021C101.355 12.8294 102.137 12.293 103.204 12.293C104.011 12.293 104.595 12.6797 104.954 13.4531C105.315 14.2264 105.645 15.1573 105.645 16.6666Z" fill="#005EB8"/>
+            </g>
+            <defs>
+                <clipPath id="clip0_723_1352">
+                    <rect width="200" height="38.7097" fill="white"/>
+                </clipPath>
+            </defs>
+        </svg>
+    
+
+
+
+
+
+    
+              
+      </a>
+      <div class="menu-button">
+          <i class="icon icon-reorder"></i>
+          <i class="icon icon-close"></i>
+          <span>Menu</span>
+      </div>
+      <div role="navigation" class="navigation-container--nested-nav-wrapper nav-menu-on">
+          <ul class="navigation-container--nested-nav-wrapper--nested-nav">
+              
+                  <li data-istoplevel="true"><div class="nested-nav--top-menu-item-wrapper nested-nav-top-menu-item--wrapper__has_children">
+                          <div class="nested-nav--top-menu-item-wrapper--link">
+                              <a data-isparent="true"  href="#" >OpenSearchCon</a>
+                          </div><div class="nested-nav--top-menu-item-wrapper--toggle">
+                              
+        <div class="opensearch-toggle-button--wrapper">
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--untoggled opensearch-toggle-button-link__visible">
+                
+        <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="14" width="30" height="3" fill="#0085B8"/>
+            <rect x="13.5" y="30.5" width="30" height="3" transform="rotate(-90 13.5 30.5)" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--toggled opensearch-toggle-button-link__invisible">
+                
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="13.5" width="30" height="3" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+        </div>
+    
+
+                              </div></div>
+                      
+                          <ul>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/events/opensearchcon/2024/north-america/index.html" data-ischild="true">2024 North America</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__has-grandchildren"><div class="nested-nav--top-menu-item-wrapper__has-grandchildren--wrapper nested-nav--top-menu-item--wrapper__has-children__has-grandchildren">
+                                              <div class="nested-nav--top-menu-item-wrapper__has-grandchildren--wrapper--link">
+                                                  
+                                                      <a href="" data-ischild="true">Archive</a>
+                                                  
+                                              </div><div class="nested-nav--top-menu-item-wrapper--toggle">
+                                                      
+        <div class="opensearch-toggle-button--wrapper">
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--untoggled opensearch-toggle-button-link__visible">
+                
+        <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="14" width="30" height="3" fill="#0085B8"/>
+            <rect x="13.5" y="30.5" width="30" height="3" transform="rotate(-90 13.5 30.5)" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--toggled opensearch-toggle-button-link__invisible">
+                
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="13.5" width="30" height="3" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+        </div>
+    
+
+                                                  </div></div><ul><li>
+                                                          <a href="/events/opensearchcon/2024/india/index.html" data-isgrandchild="true">2024 India</a>
+                                                      </li><li>
+                                                          <a href="/events/opensearchcon/2024/europe/index.html" data-isgrandchild="true">2024 Europe</a>
+                                                      </li><li>
+                                                          <a href="/events/opensearchcon/2023/north-america/index.html" data-isgrandchild="true">2023 North America</a>
+                                                      </li><li>
+                                                          <a href="/events/opensearchcon/2022/north-america/index.html" data-isgrandchild="true">2022 North America</a>
+                                                      </li></ul></li></ul>
+                      
+                  </li>
+              
+                  <li data-istoplevel="true"><div class="nested-nav--top-menu-item-wrapper nested-nav--top-menu-item--wrapper__without-children">
+                          <div class="nested-nav--top-menu-item-wrapper--link">
+                              <a data-isparent="true"  href="/downloads.html" >Download</a>
+                          </div></div>
+                      
+                  </li>
+              
+                  <li data-istoplevel="true"><div class="nested-nav--top-menu-item-wrapper nested-nav-top-menu-item--wrapper__has_children">
+                          <div class="nested-nav--top-menu-item-wrapper--link">
+                              <a data-isparent="true"  href="/about.html" >About</a>
+                          </div><div class="nested-nav--top-menu-item-wrapper--toggle">
+                              
+        <div class="opensearch-toggle-button--wrapper">
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--untoggled opensearch-toggle-button-link__visible">
+                
+        <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="14" width="30" height="3" fill="#0085B8"/>
+            <rect x="13.5" y="30.5" width="30" height="3" transform="rotate(-90 13.5 30.5)" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--toggled opensearch-toggle-button-link__invisible">
+                
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="13.5" width="30" height="3" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+        </div>
+    
+
+                              </div></div>
+                      
+                          <ul>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/releases.html" data-ischild="true">Releases</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="https://github.com/orgs/opensearch-project/projects/220" data-ischild="true">Roadmap</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/faq/" data-ischild="true">FAQ</a>
+                                          </li></ul>
+                      
+                  </li>
+              
+                  <li data-istoplevel="true"><div class="nested-nav--top-menu-item-wrapper nested-nav-top-menu-item--wrapper__has_children">
+                          <div class="nested-nav--top-menu-item-wrapper--link">
+                              <a data-isparent="true"  href="#" >Community</a>
+                          </div><div class="nested-nav--top-menu-item-wrapper--toggle">
+                              
+        <div class="opensearch-toggle-button--wrapper">
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--untoggled opensearch-toggle-button-link__visible">
+                
+        <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="14" width="30" height="3" fill="#0085B8"/>
+            <rect x="13.5" y="30.5" width="30" height="3" transform="rotate(-90 13.5 30.5)" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--toggled opensearch-toggle-button-link__invisible">
+                
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="13.5" width="30" height="3" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+        </div>
+    
+
+                              </div></div>
+                      
+                          <ul>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/blog/" data-ischild="true">Blog</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="https://forum.opensearch.org/" data-ischild="true">Forum</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/slack.html" data-ischild="true">Slack</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/events" data-ischild="true" class="events-page-menu-link__device-based">Events</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/partners/" data-ischild="true">Partners</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/community_projects/" data-ischild="true">Projects</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/community/members/index.html" data-ischild="true">Members</a>
+                                          </li></ul>
+                      
+                  </li>
+              
+                  <li data-istoplevel="true"><div class="nested-nav--top-menu-item-wrapper nested-nav-top-menu-item--wrapper__has_children">
+                          <div class="nested-nav--top-menu-item-wrapper--link">
+                              <a data-isparent="true"  href="/docs/latest/" >Documentation</a>
+                          </div><div class="nested-nav--top-menu-item-wrapper--toggle">
+                              
+        <div class="opensearch-toggle-button--wrapper">
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--untoggled opensearch-toggle-button-link__visible">
+                
+        <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="14" width="30" height="3" fill="#0085B8"/>
+            <rect x="13.5" y="30.5" width="30" height="3" transform="rotate(-90 13.5 30.5)" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--toggled opensearch-toggle-button-link__invisible">
+                
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="13.5" width="30" height="3" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+        </div>
+    
+
+                              </div></div>
+                      
+                          <ul>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/docs/latest/about/" data-ischild="true">OpenSearch and Dashboards</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/docs/latest/data-prepper/" data-ischild="true">Data Prepper</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/docs/latest/clients/" data-ischild="true">Clients</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/docs/latest/benchmark/" data-ischild="true">Benchmark</a>
+                                          </li></ul>
+                      
+                  </li>
+              
+                  <li data-istoplevel="true"><div class="nested-nav--top-menu-item-wrapper nested-nav-top-menu-item--wrapper__has_children">
+                          <div class="nested-nav--top-menu-item-wrapper--link">
+                              <a data-isparent="true"  href="/platform/index.html" >Platform</a>
+                          </div><div class="nested-nav--top-menu-item-wrapper--toggle">
+                              
+        <div class="opensearch-toggle-button--wrapper">
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--untoggled opensearch-toggle-button-link__visible">
+                
+        <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="14" width="30" height="3" fill="#0085B8"/>
+            <rect x="13.5" y="30.5" width="30" height="3" transform="rotate(-90 13.5 30.5)" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+            <a href="#" class="opensearch-toggle-button-link opensearch-toggle-button-link--toggled opensearch-toggle-button-link__invisible">
+                
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="13.5" width="30" height="3" fill="#0085B8"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+            </a>
+        </div>
+    
+
+                              </div></div>
+                      
+                          <ul>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/platform/search/index.html" data-ischild="true">Search</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/platform/observability/index.html" data-ischild="true">Observability</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/platform/security-analytics/index.html" data-ischild="true">Security Analytics</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/platform/search/vector-database.html" data-ischild="true">Vector Database</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="https://playground.opensearch.org/" data-ischild="true">Playground Demo</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/benchmarks/" data-ischild="true">Performance Benchmarks</a>
+                                          </li>
+                                  <li class="nested-nav--top-menu-item__without-grandchildren">
+                                              <a href="/release-dashboard/" data-ischild="true">Release Dashboard</a>
+                                          </li></ul>
+                      
+                  </li>
+              
+              <li class="top-banner-search">
+                  <div class="top-banner-search--field-with-results">
+                      <div class="top-banner-search--field-with-results--field">
+                          <div class="top-banner-search--field-with-results--field--wrapper">
+                              <div class="top-banner-search--field-with-results--field--wrapper--search-component">
+                                  <div class="top-banner-search--field-with-results--field--wrapper--search-component--input-wrap">
+                                      <input type="text" id="search-input" class="top-banner-search--field-with-results--field--wrapper--search-component--search-input"
+                                          placeholder="Search for anything" aria-label="Search OpenSearch"
+                                          data-docs-version="latest" autocomplete="off"
+                                      >
+                                          <div class="top-banner-search--field-with-results--field--wrapper--search-component--search-spinner"><i></i></div>
+                                          <label for="search-input" class="top-banner-search--field-with-results--field--wrapper--search-component--search-label">
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="top-banner-search--field-with-results--field--wrapper--search-component--search-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                                  <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                              </svg>
+                                          </label>
+                                  </div>
+                                  <div id="search-results" class="top-banner-search--field-with-results--field--wrapper--search-component--search-results">
+                                      <div class="top-banner-search--field-with-results--field--wrapper--search-component--search-results-wrapper"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="top-banner-search--overlay"></div>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+<script type="module">
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menu = document.querySelector('#top .nav-menu-on');
+  const button = document.querySelector('#top .menu-button');
+  button.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      button.classList.toggle('active');
+  });
+
+  const isMobile = window.matchMedia('only screen and (max-width: 834px)').matches;
+  const currentPageIsEventsList = /^\/events\/$/.test(window.location.pathname);
+
+  function getDeviceAndLocationBasedEventsMenuItemURL() {
+      if (!isMobile && !currentPageIsEventsList) {
+          const now = new Date();
+          const monthNumber = now.getUTCMonth() + 1;
+          const year = now.getFullYear();
+          const thisMonthCalendarUrl = `/events/calendar/${year}-${monthNumber < 10 ? `0${monthNumber}` : monthNumber}.html`;
+          return thisMonthCalendarUrl;
+      } else {
+        return '/events/';
+      }
+  }
+
+  // Initialize the calendar view menu item to target the current month
+  // if not on mobile, and if the current page is not the events list page.
+  // On mobile the Community -> Events menu item links to the non-calendar
+  // events list page, and if the current page is the non-calendar events
+  // list page regardless of the device then set that menu item to /events/index.html
+  // which will allow for proper menu item highlighting.
+  const eventsLinkSelector = 'a.events-page-menu-link__device-based';
+  const eventsLinkElements = document.querySelectorAll(eventsLinkSelector);
+  eventsLinkElements.forEach(eventsLink => {
+      eventsLink.setAttribute('href', getDeviceAndLocationBasedEventsMenuItemURL());
+  });
+
+  // Add the in-category class to the navigation menu items that the current page belongs to.
+  function highlightTopNavigationItems() {
+      const highlightElement = (element) => {
+          const HIGHLIGHT_CLASS_NAME = 'in-category';
+          element?.classList?.add?.(HIGHLIGHT_CLASS_NAME);
+      };
+      const highlightParentOfChild = (childLink) => {
+          const parentOfChild = childLink.parentElement.closest('li[data-istoplevel]');
+          const topLevelLinkSelector = 'a[data-isparent]';
+          const topLevelLink = parentOfChild.querySelector(topLevelLinkSelector);
+          highlightElement(topLevelLink);
+      };
+      const highlightChildFromGrandchild = (grandChildLink) => {
+          highlightElement(grandChildLink);
+          const parentMenuItemSelector = 'li.nested-nav--top-menu-item__has-grandchildren';
+          const parentMenuItem = grandChildLink.closest(parentMenuItemSelector);
+          const parentMenuItemLink = parentMenuItem.querySelector('.nested-nav--top-menu-item-wrapper__has-grandchildren--wrapper--link > a');
+          highlightElement(parentMenuItemLink);
+          highlightParentOfChild(parentMenuItem);
+      };
+
+      const highlightChildWithoutGrandChildren = (childLink) => {
+          highlightElement(childLink);
+          highlightParentOfChild(childLink.parentElement);
+      };
+
+      const matchAndHighlight = (topElement, hrefSelector) => {
+          const matchingElement = topElement.querySelector(hrefSelector);
+          if (matchingElement) {
+              if (matchingElement.hasAttribute('data-isgrandchild')) {
+                  highlightChildFromGrandchild(matchingElement);
+              } else if (matchingElement.hasAttribute('data-ischild')) {
+                  highlightElement(matchingElement);
+                  highlightParentOfChild(matchingElement);
+              } else if (matchingElement.hasAttribute('data-isparent')) {
+                  highlightElement(matchingElement);
+              }
+              return true;
+          }
+          return false;
+      };
+
+      // There are pages on the site that are not present in the top navigation header menu.
+      // This is a mapping of those pages to what menu item should be highlighted when those pages
+      // are the current page.
+      const exceptionsOverrideMap = {
+        ['/events/past.html']: getDeviceAndLocationBasedEventsMenuItemURL(),
+        ['/new-partner.html']: '/partners/',
+        ['/new-community-project.html']: '/community_projects/',
+      };
+
+      const thisPagePath = window.location.pathname;
+      const topElement = document.getElementById('top');
+      let exactMatchingMenuItemSelector = `a[href$="${thisPagePath}"]`;
+      if ((typeof exceptionsOverrideMap[thisPagePath]) !== 'undefined') {
+        const overridePath = exceptionsOverrideMap[thisPagePath];
+        exactMatchingMenuItemSelector = `a[href$="${overridePath}"]`;
+      }
+      const exactMatchHighlighted = matchAndHighlight(topElement, exactMatchingMenuItemSelector);
+      if (!exactMatchHighlighted) {
+          const thisPagePathParts = thisPagePath.split('/');
+          while ((typeof thisPagePathParts.pop()) !== 'undefined') {
+              const pathOfRemainingParts = thisPagePathParts.join('/');
+              const urlPathSelector = `a[href*="${pathOfRemainingParts}"]`;
+              const matched = matchAndHighlight(topElement, urlPathSelector);
+              if (matched) {
+                  break;
+              }
+          }
+      }
+  }
+  highlightTopNavigationItems();
+});
+
+</script>
+<script type="module">
+document.addEventListener('DOMContentLoaded', () => {
+
+  const EXPANDED_HEIGHT_PROPERTY = '--expanded-height';
+
+  function getSubMenu(button) {
+      const parentLI = button.closest('li');
+      const childUL = parentLI.querySelector('ul');
+      return childUL;
+  }
+  function initializeCustomMenuHeights(button) {
+      const childUL = getSubMenu(button);
+      const subExpandableMenus = childUL.querySelectorAll('.nested-nav--top-menu-item__has-grandchildren > ul');
+      let subMenuHeightSum = 0;
+      if (subExpandableMenus.length > 0) {
+          Array.from(subExpandableMenus).reverse().forEach(subMenu => {
+              if (subMenu.classList.contains('nested-nav--menu__mobile-hidden-collapsed')) {
+                  return;
+              }
+              const subMenuHeight = subMenu.scrollHeight;
+              subMenu.style.setProperty(EXPANDED_HEIGHT_PROPERTY, `${subMenuHeight}px`);
+              subMenu.classList.add('nested-nav--menu__mobile-hidden-collapsed');
+          });
+      }
+      if (childUL?.classList?.contains?.('nested-nav--menu__mobile-hidden-collapsed')) {
+          return;
+      }
+      const height = (childUL?.scrollHeight ?? 0) - subMenuHeightSum;
+      childUL?.style?.setProperty?.(EXPANDED_HEIGHT_PROPERTY, `${height}px`);
+      childUL?.classList?.add?.('nested-nav--menu__mobile-hidden-collapsed');
+  }
+  function onNestedNavMenuTransitionEnd(e) {
+      const collapsedClass = 'nested-nav--menu__mobile-hidden-collapsed';
+      const { target } = e;
+      if (!target?.hasAttribute?.('expanded')) {
+          target?.classList?.add?.(collapsedClass);
+      }
+  }
+
+  function swapToggleButtonState(toggle) {
+      const visibleClassName = 'opensearch-toggle-button-link__visible';
+      const visibleSelector = `.${visibleClassName}`;
+      const invisibleClassName = 'opensearch-toggle-button-link__invisible';
+      const invisibleSelector = `.${invisibleClassName}`;
+      const visibleLink = toggle.querySelector(visibleSelector);
+      const invisibleLink = toggle.querySelector(invisibleSelector);
+      visibleLink.classList.remove(visibleClassName);
+      visibleLink.classList.add(invisibleClassName);
+      invisibleLink.classList.remove(invisibleClassName);
+      invisibleLink.classList.add(visibleClassName);
+  }
+
+  function onToggleButtonClick(e) {
+
+      const toggle = e.currentTarget;
+      swapToggleButtonState(toggle);
+      const childUL = getSubMenu(toggle);
+      const isAlreadyExpanded = childUL?.hasAttribute?.('expanded') ?? false;
+      if (childUL.classList.contains('nested-nav--menu__mobile-hidden-collapsed')) {
+          childUL?.classList?.remove?.('nested-nav--menu__mobile-hidden-collapsed');
+      }
+      window.setTimeout(() => {
+          if (isAlreadyExpanded) {
+              // If the menu is already expanded then the toggleAttribute
+              // call is going to collapse.
+              // Ensure that all (if any) grandchildren / sub menus are
+              // also collapsed, and subtract their --expanded-height custom CSS
+              // property value from the containing.
+              const expandedSubMenu = childUL?.querySelectorAll('ul[expanded]');
+              const expandedHeight = Number.parseInt(childUL.style.getPropertyValue(EXPANDED_HEIGHT_PROPERTY), 10);
+              if (expandedSubMenu.length > 0) {
+                  let reducedExpandedHeight = expandedHeight;
+                  expandedSubMenu.forEach(subMenu => {
+                      const subMenuToggle = subMenu.parentElement.querySelector('.opensearch-toggle-button--wrapper');
+                      swapToggleButtonState(subMenuToggle);
+                      subMenu.toggleAttribute('expanded');
+                      const subMenuExpandedHeightPropertyValue = subMenu.style.getPropertyValue(EXPANDED_HEIGHT_PROPERTY);
+                      const numericSubMenuExpandedHeight = Number.parseInt(subMenuExpandedHeightPropertyValue, 10);
+                      reducedExpandedHeight -= numericSubMenuExpandedHeight;
+                  });
+                  childUL.style.setProperty(EXPANDED_HEIGHT_PROPERTY, `${reducedExpandedHeight}px`);
+              } else {
+                  // Subtract the --expanded-height of the collapsing menu from the --expanded-height of the enclosing parent.
+                  // If there is an expandable / collapsable parent.
+                   const expandedParentMenu = childUL?.parentElement?.closest?.('ul[expanded]');
+                   if (expandedParentMenu) {
+                      const parentMenuExpandedHeight = expandedParentMenu.style.getPropertyValue(EXPANDED_HEIGHT_PROPERTY);
+                      const numericExpandedHeight = Number.parseInt(parentMenuExpandedHeight, 10);
+                      const reducedExpandedHeight = numericExpandedHeight - expandedHeight;
+                      const formattedExpandedHeight = `${reducedExpandedHeight}px`;
+                      expandedParentMenu.style.setProperty(EXPANDED_HEIGHT_PROPERTY, formattedExpandedHeight);
+                   }
+              }
+          } else {
+              // If the menu is not yet expanded then ensure that
+              // the expandedHeight is added to any parent expandable
+              // list, if any.
+              const expandedHeightPropertyValue = childUL?.style?.getPropertyValue?.(EXPANDED_HEIGHT_PROPERTY) ?? '';
+              const numericExpandedHeight = Number.parseInt(expandedHeightPropertyValue, 10);
+
+              const childULParent = childUL?.parentElement;
+              if (childULParent) {
+                  if (childULParent.classList.contains('nested-nav--top-menu-item__has-grandchildren')) {
+                      const containingUL = childULParent.closest('ul');
+                      if (containingUL) {
+                          const expandedHeight = containingUL.style.getPropertyValue(EXPANDED_HEIGHT_PROPERTY);
+                          if (expandedHeight !== '') {
+                              const parentPixelHeight = Number.parseInt(expandedHeight, 10);
+                              const totalParentPixelHeightForParent = parentPixelHeight + numericExpandedHeight;
+                              const formattedParentPixelHeight = `${totalParentPixelHeightForParent}px`;
+                              containingUL.style.setProperty(EXPANDED_HEIGHT_PROPERTY, formattedParentPixelHeight);
+                          }
+                      }
+                  }
+              }
+          }
+          childUL?.toggleAttribute?.('expanded');
+      }, 60);
+  }
+
+  const topNavigationToggleButtons = document.querySelectorAll('#top .opensearch-toggle-button--wrapper');
+  for (let i = 0; i < topNavigationToggleButtons.length; ++i) {
+      const button = topNavigationToggleButtons[i];
+      initializeCustomMenuHeights(button);
+      button.addEventListener('click', onToggleButtonClick);
+  }
+  document.querySelector('#top .navigation-container--nested-nav-wrapper--nested-nav')?.addEventListener?.('transitionend', onNestedNavMenuTransitionEnd);
+});
+</script>
+
+
+
+
+
+<div class="copy-banner">
+    <div class="container ">
+        
+        
+        
+        <h1><a href="/artifacts/opensearch-dashboards/opensearch-dashboards-1-3-14-docker-arm64.html">Artifacts</a></h1>
+    </div>
+</div>
+<div id="billboard"></div>
+
+<div class="container sidebar-right">
+  <div class="row">
+    <div id="subwrap">
+      <div role="main">
+        <div id="content-main" class="col">
+          
+
+
+
+
+<h2>opensearch-dashboards-1.3.14-docker-arm64</h2>
+
+<div class="artifact-standalone">
+<strong>Version:</strong> 1.3.14 <br />
+
+<strong>Architecture:</strong> arm64<br />
+
+
+<strong>Platform:</strong> docker<br />
+
+
+
+
+
+
+</div>
+
+          
+        </div>
+      </div>
+      
+      <!-- END #content-main -->
+      <div id="content-related" class="sidebar">
+      
+      </div>
+      <!-- END #content-related -->
+    </div>
+    <!-- END #subwrap -->
+    <div id="content-extra" class="sidebar">
+    
+    </div>
+    <!-- END #content-extra -->
+  </div>
+</div>
+
+
+
+    
+    
+<!-- //  LIGHT THEME // -->
+
+  <footer class="pt-5 pb-2 mt-5 footer-main-wrapper-light border-top">
+
+
+      <div class="container">
+        <div class="row">
+          <!-- LOGO, DESCRIPTION AND COPYRIGHT -->
+          <div class="col-lg-6 col-sm-12">
+            <!-- LOGO -->
+            <div class="row">
+              <div class="mb-4">
+                <a href="/" class="d-flex justify-content-start text-decoration-none">
+                  
+        <svg width="310" height="61" viewBox="0 0 310 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_2_205)">
+                <path d="M51.4479 22.9801C50.4065 22.9801 49.5624 23.8243 49.5624 24.8656C49.5624 40.3813 36.9845 52.9591 21.4689 52.9591C20.4275 52.9591 19.5834 53.8033 19.5834 54.8446C19.5834 55.8859 20.4275 56.7301 21.4689 56.7301C39.0671 56.7301 53.3334 42.4639 53.3334 24.8656C53.3334 23.8243 52.4892 22.9801 51.4479 22.9801Z" fill="#005EB8"/>
+                <path d="M40.0679 35.0634C41.881 32.1055 43.6346 28.1616 43.2896 22.6401C42.5749 11.2028 32.2158 2.52621 22.4339 3.46651C18.6044 3.83462 14.6724 6.95606 15.0217 12.5471C15.1735 14.9768 16.3627 16.4108 18.2954 17.5133C20.1349 18.5627 22.4982 19.2275 25.1774 19.981C28.4135 20.8912 32.1674 21.9136 35.0526 24.0398C38.5104 26.5881 40.8743 29.542 40.0679 35.0634Z" fill="#003B5C"/>
+                <path d="M3.26551 15.0634C1.4523 18.0213 -0.301255 21.9652 0.0437442 27.4866C0.758393 38.9239 11.1176 47.6005 20.8995 46.6603C24.7289 46.2921 28.661 43.1707 28.3117 37.5796C28.1598 35.1499 26.9706 33.7159 25.038 32.6134C23.1985 31.564 20.8352 30.8993 18.156 30.1458C14.9198 29.2355 11.1659 28.2131 8.28079 26.0869C4.82289 23.5387 2.4591 20.5848 3.26551 15.0634Z" fill="#005EB8"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M302.083 26.73V45.8967H309.583V25.0634C309.583 21.2239 308.833 18.3234 307.333 16.3559C305.832 14.3694 303.568 13.3967 300.625 13.3967C297.432 13.3967 294.873 15.264 293.333 18.3967H292.917C293.03 16.7793 293.133 15.8527 293.208 15.1761C293.286 14.4784 293.333 14.0464 293.333 13.3967V1.31335H285.833V45.8967H293.75V30.48C293.75 27.0226 293.866 24.4646 294.578 22.6309C295.289 20.7779 296.53 19.8515 298.3 19.8515C300.667 19.8515 302.083 22.0501 302.083 26.73ZM193.21 43.5874C195.237 41.4924 196.25 38.4747 196.25 34.5344C196.25 32.0741 195.695 29.8829 194.584 27.9609C193.493 26.0388 191.554 24.1552 188.767 22.3099C186.702 20.9645 185.25 19.7632 184.412 18.7061C183.593 17.6489 183.184 16.4092 183.184 14.9869C183.184 13.5453 183.525 12.4113 184.207 11.5848C184.909 10.739 185.902 10.3162 187.189 10.3162C188.358 10.3162 189.449 10.5276 190.462 10.9504C191.495 11.3734 192.479 11.8539 193.415 12.392L196.045 6.10682C193.025 4.30006 189.878 3.39669 186.604 3.39669C183.174 3.39669 180.437 4.45383 178.391 6.56812C176.364 8.68241 175.351 11.5464 175.351 15.1599C175.351 17.0434 175.604 18.6964 176.111 20.1188C176.637 21.5411 177.368 22.8289 178.303 23.9822C179.258 25.1162 180.651 26.3079 182.483 27.5573C184.588 28.9796 186.098 30.277 187.013 31.4494C187.929 32.6027 188.388 33.8809 188.388 35.284C188.388 36.7064 187.998 37.8308 187.218 38.6573C186.458 39.4838 185.318 39.897 183.798 39.897C181.128 39.897 178.196 38.8687 175 36.8121V44.5677C177.611 46.0093 180.777 46.73 184.5 46.73C188.299 46.73 191.203 45.6825 193.21 43.5874ZM201.395 42.4588C203.733 45.3063 206.922 46.73 210.96 46.73C214.419 46.73 217.385 45.9893 219.858 44.5078V38.1874C217.231 39.7459 214.661 40.5251 212.148 40.5251C210.178 40.5251 208.632 39.8324 207.511 38.4472C206.39 37.0427 205.892 35.0134 205.833 32.1467H221.25V27.9421C221.25 23.3438 220.236 19.7748 218.207 17.2351C216.177 14.6762 213.405 13.3967 209.888 13.3967C206.119 13.3967 203.183 14.8878 201.076 17.87C198.97 20.8522 197.917 24.9984 197.917 30.3087C197.917 35.5419 199.076 39.5919 201.395 42.4588ZM207.105 21.0734C207.82 19.8999 208.728 19.313 209.83 19.313C211.008 19.313 211.936 19.919 212.612 21.1312C213.288 22.3433 213.712 24.3828 213.75 26.73H205.833C205.949 24.2865 206.39 22.2279 207.105 21.0734ZM240 45.8967L238.75 41.73H238.333C237.185 43.6123 236.079 44.9534 234.853 45.664C233.627 46.3747 232.078 46.73 230.21 46.73C227.815 46.73 225.927 45.8465 224.544 44.0795C223.182 42.3124 222.5 39.854 222.5 36.7041C222.5 33.3237 223.434 30.8172 225.303 29.1846C227.192 27.5329 230.005 26.6205 233.743 26.4477L238.065 26.2749V23.97C238.065 20.9738 236.751 19.4756 234.122 19.4756C232.176 19.4756 229.937 20.2247 227.406 21.7229L224.719 16.4218C227.952 14.405 231.412 13.3967 235.208 13.3967C238.654 13.3967 241.327 14.3763 243.118 16.3354C244.928 18.2752 245.833 21.0314 245.833 24.6039V45.8967H240ZM233.393 40.7375C234.814 40.7375 235.943 40.1133 236.78 38.8649C237.637 37.5972 238.065 35.9166 238.065 33.8231V31.1149L235.671 31.2302C233.899 31.3262 232.594 31.8256 231.758 32.7283C230.94 33.631 230.531 34.9755 230.531 36.7617C230.531 39.4123 231.485 40.7375 233.393 40.7375ZM265 14.0217C264.108 13.7342 262.781 13.3967 261.852 13.3967C260.542 13.3967 259.394 13.8279 258.407 14.6903C257.421 15.5527 256.668 16.3844 255.833 18.3967H255.417L254.167 14.23H248.333V45.8967H256.219V29.23C256.219 26.432 256.397 24.6269 257.383 23.1704C258.37 21.6948 259.783 20.9569 261.623 20.9569C262.478 20.9569 263.219 21.1217 263.75 21.3134L265 14.0217ZM276.667 46.73C272.869 46.73 269.962 45.4617 267.978 42.6719C265.993 39.882 265 35.7839 265 30.3775C265 24.7209 265.935 20.4978 267.805 17.7079C269.695 14.9181 272.514 13.3967 276.446 13.3967C277.628 13.3967 278.96 13.6964 280.257 14.0427C281.555 14.389 283.136 14.8259 284.167 15.48L281.574 21.5174C279.991 20.5747 278.588 20.1034 277.367 20.1034C275.744 20.1034 274.571 20.9595 273.845 22.6719C273.139 24.365 272.787 26.9143 272.787 30.3198C272.787 33.6483 273.139 36.1399 273.845 37.7945C274.552 39.4299 275.706 40.2476 277.309 40.2476C279.217 40.2476 281.212 39.5742 283.292 38.2274V44.9807C281.288 46.2313 279.09 46.73 276.667 46.73Z" fill="#003B5C"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M89.8142 41.1155C92.4384 37.3724 93.75 32.0169 93.75 25.049C93.75 18.0811 92.4475 12.7352 89.8434 9.01135C87.2384 5.26827 83.495 3.39673 78.614 3.39673C73.6749 3.39673 69.8933 5.25867 67.2693 8.98255C64.6454 12.6872 63.3334 18.0236 63.3334 24.9914C63.3334 32.0169 64.6454 37.4011 67.2693 41.1442C69.8933 44.8681 73.6555 46.7301 78.5562 46.7301C83.4375 46.7301 87.19 44.8586 89.8142 41.1155ZM73.2021 36.0191C71.9866 33.5045 71.3789 29.8478 71.3789 25.049C71.3789 20.231 71.9866 16.5743 73.2021 14.0789C74.4176 11.5643 76.2216 10.3071 78.614 10.3071C83.3217 10.3071 85.6759 15.221 85.6759 25.049C85.6759 34.877 83.3025 39.791 78.5562 39.791C76.2024 39.791 74.4176 38.5336 73.2021 36.0191ZM106.822 45.895C107.891 46.5123 109.042 46.7301 110.417 46.7301C113.358 46.7301 115.75 45.3355 117.45 42.3644C119.15 39.3934 120 35.2937 120 30.0655C120 24.76 119.178 20.6604 117.536 17.7665C115.893 14.8533 113.621 13.3967 110.718 13.3967C107.7 13.3967 105.335 15.1941 103.75 18.3967H103.333L102.083 14.2301H96.25V60.4801H103.75V46.7301C103.75 46.1899 103.639 44.3538 103.333 41.7301H103.75C104.375 43.6051 105.771 45.2583 106.822 45.895ZM104.902 22.0494C105.571 20.6411 106.649 19.9369 108.139 19.9369C109.533 19.9369 110.555 20.7665 111.205 22.4256C111.873 24.0848 112.208 26.5928 112.208 29.9497C112.208 36.7792 110.871 40.194 108.197 40.194C106.649 40.194 105.542 39.3837 104.873 37.7631C104.205 36.1426 103.871 33.5574 103.871 30.0076V28.9947C103.909 25.7536 104.253 23.4385 104.902 22.0494ZM134.71 46.7301C130.672 46.7301 127.483 45.3063 125.145 42.4588C122.826 39.592 121.667 35.542 121.667 30.3087C121.667 24.9985 122.72 20.8522 124.826 17.8701C126.933 14.8878 129.869 13.3967 133.638 13.3967C137.155 13.3967 139.928 14.6762 141.957 17.2351C143.986 19.7748 145 23.3438 145 27.9421V32.1467H129.583C129.642 35.0135 130.14 37.0427 131.261 38.4472C132.382 39.8325 133.928 40.5251 135.898 40.5251C138.411 40.5251 140.981 39.7459 143.608 38.1875V44.5078C141.135 45.9893 138.169 46.7301 134.71 46.7301ZM133.58 19.3131C132.478 19.3131 131.57 19.8999 130.855 21.0735C130.14 22.2279 129.699 24.2866 129.583 26.7301H137.5C137.462 24.3828 137.038 22.3433 136.363 21.1312C135.686 19.9191 134.758 19.3131 133.58 19.3131ZM163.75 26.7301V45.8967H171.25V25.2293C171.25 21.3625 170.519 18.4236 169.057 16.4129C167.614 14.4021 165.43 13.3967 162.506 13.3967C160.775 13.3967 159.264 13.8221 157.975 14.6728C156.687 15.5041 155.693 16.908 155 18.3967H154.583L153.542 14.2301H147.5V45.8967H155.417V30.6884C155.417 26.7636 155.561 24.0886 156.331 22.4452C157.1 20.7824 158.312 19.9511 159.967 19.9511C161.218 19.9511 162.122 20.5504 162.679 21.7491C163.238 22.9479 163.75 24.3906 163.75 26.7301Z" fill="#005EB8"/>
+            </g>
+            <defs>
+                <clipPath id="clip0_2_205">
+                    <rect width="310" height="60" fill="white" transform="translate(0 0.896729)"/>
+                </clipPath>
+            </defs>
+        </svg>
+        
+
+
+
+
+
+    
+
+
+
+
+
+    
+    
+                </a>
+              </div>
+              <!-- DESCRIPTION -->
+              <div class="row">
+                <p class="mb-5 ms-2 footer-content-light">OpenSearch is a community-driven, Apache 2.0-licensed open source search and analytics suite that makes it easy to ingest, search, visualize, and analyze data.</p>
+              </div>
+
+
+              <div class="container">
+                <!-- SOCIAL ICONS-->
+                <div class ="row">
+                  
+                  <div class="container ms-2 mt-5 mb-3">
+                    <div class="row justify-content-start">
+        
+                      <div class="d-flex gap-2">
+                        <a href="https://www.opensearch.org/slack.html" class="text-reset btn btn-icon">
+                          
+        <svg width="26" height="25" class="bi svg-icon" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_1_382)">
+                <path d="M21.0125 63.6875C21.0125 69.475 16.2875 74.1938 10.5063 74.1938C4.725 74.1938 0 69.475 0 63.6937C0 57.9125 4.725 53.1875 10.5 53.1875H21.0125V63.6875ZM26.3 63.6875C26.3 57.9125 31.025 53.1875 36.8063 53.1875C42.5875 53.1875 47.3125 57.9125 47.3125 63.6875V90C47.3125 95.775 42.5875 100.5 36.8125 100.5C34.0281 100.495 31.359 99.3876 29.3889 97.4199C27.4189 95.4522 26.3083 92.7844 26.3 90V63.6875ZM36.8125 21.5125C31.025 21.5125 26.3 16.7875 26.3 11.0063C26.3 5.225 31.025 0.5 36.8125 0.5C42.6 0.5 47.3125 5.225 47.3125 11V21.5125H36.8125ZM36.8125 26.8C42.5875 26.8 47.3125 31.525 47.3125 37.3063C47.3125 43.0875 42.5875 47.8125 36.8125 47.8125H10.5C4.73125 47.8125 0 43.0875 0 37.3125C0 31.525 4.725 26.8 10.5 26.8H36.8125ZM78.9938 37.3125C78.9938 31.525 83.7125 26.8 89.4938 26.8C95.275 26.8 100 31.525 100 37.3063C100 43.0875 95.275 47.8125 89.5 47.8125H78.9938V37.3125ZM73.6938 37.3125C73.6938 43.0875 68.975 47.8125 63.1937 47.8125C60.4104 47.8059 57.7429 46.6977 55.7742 44.7302C53.8055 42.7627 52.6958 40.0958 52.6875 37.3125V11C52.6875 5.23125 57.4125 0.5 63.1875 0.5C68.975 0.5 73.6938 5.225 73.6938 11V37.3125ZM63.1875 79.4875C68.975 79.4875 73.7 84.2125 73.7 89.9938C73.7 95.775 68.975 100.5 63.1875 100.5C57.4 100.5 52.6812 95.775 52.6812 90V79.4875H63.1875ZM63.1875 74.1938C57.4125 74.1938 52.6875 69.475 52.6875 63.6937C52.6875 57.9125 57.4125 53.1875 63.1875 53.1875H89.5C95.275 53.1875 100 57.9125 100 63.6875C100 69.475 95.275 74.1938 89.5 74.1938H63.1875Z"/>
+            </g>
+            <defs>
+                <clipPath id="clip0_1_382">
+                    <rect width="100" height="100" fill="white" transform="translate(0 0.5)"/>
+                </clipPath>
+            </defs>
+        </svg>
+    
+
+
+
+
+
+    
+    
+                        </a>
+                        <a href="https://fosstodon.org/@OpenSearchProject" class="text-reset btn btn-icon">
+                          
+        <svg width="26" height="25" class="bi svg-icon" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_1_380)">
+                <path d="M69.9375 76.7188C82.5375 75.2188 93.5 67.5 94.875 60.45C97.05 49.3375 96.875 33.3312 96.875 33.3312C96.875 11.6437 82.5875 5.28125 82.5875 5.28125C75.3875 1.9875 63.0188 0.60625 50.1688 0.5H49.8563C37 0.60625 24.6375 1.9875 17.4375 5.28125C17.4375 5.28125 3.15625 11.6375 3.15625 33.3312L3.14375 37.4688C3.11875 41.4688 3.1 45.9062 3.2125 50.5375C3.73125 71.75 7.125 92.6625 26.8375 97.85C35.925 100.244 43.7313 100.744 50.0188 100.4C61.4125 99.775 67.8125 96.3562 67.8125 96.3562L67.4375 88.125C67.4375 88.125 59.2937 90.6875 50.1437 90.375C41.0812 90.0625 31.5188 89.4 30.05 78.325C29.917 77.2969 29.8482 76.2616 29.8438 75.225C29.8438 75.225 38.7438 77.3875 50.0188 77.9C56.9125 78.2125 63.375 77.5 69.9438 76.7188H69.9375ZM80.0188 61.2813H69.5625V35.7812C69.5625 30.4125 67.2875 27.6875 62.7437 27.6875C57.7187 27.6875 55.2 30.9187 55.2 37.3187V51.275H44.8V37.3125C44.8 30.9125 42.2813 27.6812 37.2563 27.6812C32.7125 27.6812 30.4375 30.4062 30.4375 35.7812V61.275H19.9813V35.0125C19.9813 29.6458 21.3563 25.3833 24.1063 22.225C26.9563 19.0688 30.6813 17.45 35.3125 17.45C40.6625 17.45 44.7125 19.5 47.3938 23.5938L50 27.9375L52.6062 23.5938C55.2875 19.5 59.3375 17.45 64.6938 17.45C69.3188 17.45 73.0437 19.0688 75.8875 22.225C78.6458 25.3792 80.0229 29.6417 80.0188 35.0125V61.2813Z"/>
+            </g>
+            <defs>
+                <clipPath id="clip0_1_380">
+                    <rect width="100" height="100" fill="white" transform="translate(0 0.5)"/>
+                </clipPath>
+            </defs>
+        </svg>         
+    
+
+
+
+
+
+    
+    
+                        </a>
+                        <a href="https://X.com/OpenSearchProj" class="text-reset btn btn-icon">
+                          
+        <svg width="30" height="30" class="bi svg-icon" viewBox="0 0 98 101" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_2_36)">
+                <path d="M58.3233 42.4391L94.806 0.117645H86.1608L54.4829 36.8647L29.1818 0.117645H0L38.2602 55.6858L0 100.066H8.64572L42.0984 61.2601L68.8182 100.066H98L58.3212 42.4391H58.3233ZM46.4818 56.1753L42.6053 50.642L11.7609 6.61271H25.0402L49.932 42.1458L53.8085 47.6791L86.1649 93.8666H72.8855L46.4818 56.1775V56.1753Z"/>
+            </g>
+            <defs>
+                <clipPath id="clip0_2_36">
+                    <rect width="98" height="100" fill="white" transform="translate(0 0.117645)"/>
+                </clipPath>
+            </defs>
+        </svg>
+    
+
+
+
+
+
+    
+    
+                        </a>
+                        <a href="https://www.youtube.com/c/OpenSearchProject" class="text-reset btn btn-icon">
+                          
+        <svg width="26" height="25" class="bi svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50.3187 12.4938H50.875C56.0125 12.5125 82.0437 12.7 89.0625 14.5875C91.1843 15.1636 93.1178 16.2864 94.6697 17.8438C96.2217 19.4012 97.3377 21.3387 97.9062 23.4625C98.5375 25.8375 98.9813 28.9813 99.2812 32.225L99.3438 32.875L99.4812 34.5L99.5312 35.15C99.9375 40.8625 99.9875 46.2125 99.9937 47.3812V47.85C99.9875 49.0625 99.9313 54.775 99.4812 60.725L99.4313 61.3813L99.375 62.0313C99.0625 65.6063 98.6 69.1563 97.9062 71.7688C97.3377 73.8926 96.2217 75.83 94.6697 77.3875C93.1178 78.9449 91.1843 80.0677 89.0625 80.6438C81.8125 82.5938 54.2562 82.7313 50.4375 82.7375H49.55C47.6188 82.7375 39.6312 82.7 31.2563 82.4125L30.1937 82.375L29.65 82.35L28.5812 82.3063L27.5125 82.2625C20.575 81.9563 13.9688 81.4625 10.925 80.6375C8.80392 80.062 6.87093 78.9401 5.31907 77.3838C3.76721 75.8276 2.65077 73.8914 2.08125 71.7688C1.3875 69.1625 0.925 65.6063 0.6125 62.0313L0.5625 61.375L0.5125 60.725C0.202271 56.4901 0.0313457 52.2461 0 48L0 47.2313C0.0125 45.8875 0.0625 41.2437 0.4 36.1187L0.44375 35.475L0.4625 35.15L0.5125 34.5L0.65 32.875L0.7125 32.225C1.0125 28.9813 1.45625 25.8313 2.0875 23.4625C2.65607 21.3387 3.77208 19.4012 5.324 17.8438C6.87593 16.2864 8.80942 15.1636 10.9312 14.5875C13.975 13.775 20.5812 13.275 27.5187 12.9625L28.5812 12.9188L29.6562 12.8813L30.1937 12.8625L31.2625 12.8188C37.2107 12.6275 43.1613 12.5213 49.1125 12.5L50.3187 12.4938ZM40 32.5563V62.6688L65.9813 47.6188L40 32.5563Z"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+                        </a>
+                        <a href="https://www.facebook.com/OpenSearchProject/" class="text-reset btn btn-icon">
+                          
+        <svg width="25" height="25" class="bi svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_1_384)">
+                <path d="M100 50.3062C100 22.5187 77.6125 -0.0062561 50 -0.0062561C22.375 -6.10342e-06 -0.0125122 22.5187 -0.0125122 50.3125C-0.0125122 75.4187 18.275 96.2312 42.175 100.006V64.85H29.4875V50.3125H42.1875V39.2187C42.1875 26.6125 49.6562 19.65 61.075 19.65C66.55 19.65 72.2687 20.6312 72.2687 20.6312V33.0062H65.9625C59.7562 33.0062 57.8187 36.8875 57.8187 40.8687V50.3062H71.6812L69.4687 64.8438H57.8125V100C81.7125 96.225 100 75.4125 100 50.3062Z"/>
+            </g>
+            <defs>
+                <clipPath id="clip0_1_384">
+                    <rect width="100" height="100" fill="white"/>
+                </clipPath>
+            </defs>
+        </svg>
+             
+
+
+
+
+
+
+    
+    
+                        </a>
+                        <a href="https://www.linkedin.com/company/opensearch-project/" class="text-reset btn btn-icon">
+                          
+        <svg width="26" height="25" class="bi svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 7.1625C0 3.20625 3.2875 0 7.34375 0H92.6562C96.7125 0 100 3.20625 100 7.1625V92.8375C100 96.7937 96.7125 100 92.6562 100H7.34375C3.2875 100 0 96.7937 0 92.8375V7.1625ZM30.8937 83.7125V38.5563H15.8875V83.7125H30.8937ZM23.3937 32.3875C28.625 32.3875 31.8812 28.925 31.8812 24.5875C31.7875 20.1562 28.6313 16.7875 23.4937 16.7875C18.3563 16.7875 15 20.1625 15 24.5875C15 28.925 18.2563 32.3875 23.2938 32.3875H23.3937ZM54.0687 83.7125V58.4938C54.0687 57.1438 54.1688 55.7937 54.5687 54.8312C55.65 52.1375 58.1188 49.3438 62.2688 49.3438C67.7 49.3438 69.8688 53.4813 69.8688 59.5563V83.7125H84.875V57.8125C84.875 43.9375 77.475 37.4875 67.6 37.4875C59.6375 37.4875 56.0687 41.8625 54.0687 44.9437V45.1H53.9688L54.0687 44.9437V38.5563H39.0687C39.2562 42.7938 39.0687 83.7125 39.0687 83.7125H54.0687Z"/>
+        </svg>
+    
+
+
+
+
+
+    
+    
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        
+                <!-- COPYRIGHT -->
+                <div class="row">
+                  
+                  <div class="col footer-copyright-light  ms-2 mb-5 justify-content-start">
+                    <span class="text-center">© OpenSearch contributors, 2024. OpenSearch is a registered trademark of Amazon Web Services.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- CATEGORIES -->
+          <div class="offset-lg-2 offset-md-0  col-lg-4 ">
+            <div class="row">
+              <!-- footer navlinks column -- Participate and Partners -->
+              <div class="col col-sm-8 col-lg-6">
+                 
+                <div class="mb-2 d-flex justify-content-start">
+                  <h5 class="footer-column-categories-light">Participate</h5>
+                </div>
+                <div>
+                  <ul class="list-unstyled">
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/codeofconduct.html" class="text-decoration-none text-reset">Code of Conduct</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="https://forum.opensearch.org/" class="text-decoration-none text-reset">Forum</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="https://github.com/opensearch-project" class="text-decoration-none text-reset">Project Repo</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="https://github.com/opensearch-project/community" class="text-decoration-none text-reset">Community Repo</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="https://www.meetup.com/pro/opensearchproject/" class="text-decoration-none text-reset">Meetup</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/connect.html" class="text-decoration-none text-reset">Connect</a>
+                      </li>
+                    
+                  </ul>
+                </div>
+                 
+                <div class="my-5"> 
+                  <div class="mb-2 d-flex justify-content-start">
+                    <h5 class="footer-column-categories-light">Partners</h5>
+                  </div>
+                  <div>
+                    <ul class="list-unstyled">
+                      
+                        <li class="footer-category-navlinks-light mb-2">
+                          <a href="https://github.com/opensearch-project/project-website/issues/new?assignees=&labels=enhancement%2C+untriaged&projects=opensearch-project%2FWebsite+Update+Project%2Copensearch-project%2FPartner+Updates+and+Additions&template=partner_add_new_partner.yml&title=%5BPARTNER%5D+%7B%7B+Company+name+%7D%7D+" class="text-decoration-none text-reset">Become a Partner</a>
+                        </li>
+                      
+                        <li class="footer-category-navlinks-light mb-2">
+                          <a href="https://opensearch.org/partners/" class="text-decoration-none text-reset">Find a Partner</a>
+                        </li>
+                      
+                    </ul>
+                  </div>
+                </div>
+  
+              </div>
+  
+              <!-- footer navlinks column -- Resources -->
+              <div class="col col-sm-8 col-lg-6">
+                 
+                <div class=" mb-2 d-flex justify-content-start">
+                  <h5 class="footer-column-categories-light">Resources</h5>
+                </div>
+                <div>
+                  <ul class="list-unstyled">
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/about.html" class="text-decoration-none text-reset">About</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/faq/" class="text-decoration-none text-reset">FAQ</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/releases.html" class="text-decoration-none text-reset">Release Schedule</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/releases.html#maintenance-policy" class="text-decoration-none text-reset">Maintenance Policy</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/docs/latest/about/" class="text-decoration-none text-reset">Documentation</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/docs/latest/getting-started/" class="text-decoration-none text-reset">Getting Started</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/testimonials/" class="text-decoration-none text-reset">Testimonials</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="/trademark-brand-policy.html" class="text-decoration-none text-reset">Trademark & Brand</a>
+                      </li>
+                    
+                      <li class="footer-category-navlinks-light mb-2">
+                        <a href="https://aws.amazon.com/privacy/" class="text-decoration-none text-reset">Privacy</a>
+                      </li>
+                    
+                  </ul>
+                </div>
+  
+              </div>
+            </div>
+  
+  
+  
+          </div>
+        </div>
+      </div>
+
+
+  </footer>
+</div>
+
+
+
+
+    <script>
+    function extless(input) {
+        return input.replace(/(.*)\.[^.]+$/, '$1');
+    }
+    var require = {
+        shim: {
+            'jquery': []
+        },
+        paths: {
+            "jquery": extless("/assets/js/lib/jquery-3.6/jquery-3.6.0.min.js"),
+            "clipboard": extless("/assets/js/lib/clipboard/dist/clipboard.min.js"),
+            "mod/floating-warning": extless("/assets/js/mod/floating-warning.js"),
+            "mod/list-collapsing": extless("/assets/js/mod/list-collapsing.js"),
+            "mod/tag-picker" : extless("/assets/js/mod/tag-picker.js"),
+            "mod/version-switcher": extless("/assets/js/mod/version-switcher.js"),
+            "mod/search-key": extless("/assets/js/mod/search-key.js"),
+            "mod/console-tabs": extless("/assets/js/mod/console-tabs.js"),
+            "mod/locale-date": extless("/assets/js/mod/locale-date.js"),
+        }
+    };
+    </script>
+    <script data-main="/assets/js/main.js" src="/assets/js/lib/require.js"></script>
+    <script src="/assets/js/search.js"></script>
+    </body>
+</html>

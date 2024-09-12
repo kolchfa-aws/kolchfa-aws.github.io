@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" class="tutorial-layout">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="ROBOTS" content="ALL" />
+        <meta name="MSSmartTagsPreventParsing" content="true" />
+        <meta name="Copyright" content="" />
+        <link rel="stylesheet" href="/assets/css/output.css" >
+        <title> OPN305 OpenSearch: Securing your OpenSearch Data &middot;  OpenSearch</title>
+        <script src="https://opensearch.org/assets/js/lib/jquery-3.6/jquery-3.6.0.min.js"></script>
+        <script src="https://opensearch.org/assets/js/lib/webfontloader/webfontloader.js"></script>
+
+        <script>
+            $( document ).ready(function() {
+                var gitPodStatus = {};
+                // The OpenSearch tutorials in GitPod reveal themselves at a URL that looks like this:
+                // 8000-blah-blah-blah.gitpod.io
+                // so we check the window location starting with 8, this could be more specific
+                // but we really just want to check if we're being served from opensearch.org or not
+                if (window.location.host[0] == '8') {
+                    $('body').addClass('gitpod');
+
+                    // Dashboards has a strange way of making itself avaliable
+                    // there is a script on gitpod that checks for true avaliablity
+                    // then adds an empty file, so we can poll it
+                    gitPodStatus.dashboardsReady = false;
+                    gitPodStatus.checkCount = 0;
+                    // check every 2 seconds, clear if we reach a max or once found
+                    gitPodStatus.dashboardsInterval = setInterval(function() {
+                        // check for 5 minutes
+                        if (gitPodStatus.checkCount >= 150) {
+                            clearInterval(gitPodStatus.dashboardsInterval);
+                        } else {
+                            gitPodStatus.checkCount += 1;
+                        }
+                        jQuery.get('/tutorial/dashboardsready.txt').done(function() { 
+                            clearInterval(gitPodStatus.dashboardsInterval);
+                            $('body').addClass('gitpod-dashboards-ready');
+                        });
+                    }, 2000);
+
+
+
+                    $('a.gitpod-replace-port').each(function() {
+                        var href = $(this).attr('href');
+                        var port = $(this).attr('data-port')
+                        $(this).attr('href','https://'+window.location.host.replace('8000',port)+'/');
+                    });
+
+                    $('code.gitpod-replace-port').each(function() {
+                        var text = $(this).text();
+                        var port = $(this).attr('data-port')
+                        $(this).text('https://'+window.location.host.replace('8000',port)+'/');
+                    });
+
+
+                    $('.gitpod-dashboards').each(function() {
+                        $(this).text('https://'+window.location.host.replace('8000','5601')+'/');
+                    });
+
+                    $('.gitpod-opensearch').each(function() {
+                        $(this).text('https://'+window.location.host.replace('8000','9200')+'/');
+                    });
+                    
+                    let replacementDomain = 'https://opensearch.org';
+                    let replacer = function(attr) {
+                        return function() { 
+                            let hrefValue = $(this).attr(attr); 
+                            if (hrefValue[0] === '/') { 
+                                $(this).attr(attr, replacementDomain + hrefValue); 
+                            }  
+                        }
+                    };
+                    if (location.port !== '4000') {
+                        $('link[rel="stylesheet"]').each(replacer('href'));
+                        $('img').each(replacer('src'));
+                        console.log('not 4000');
+                    }
+                } else {
+                    // not gitpod.
+                }
+            });
+            WebFont.load({
+              custom: {
+                families: ['FontAwesome'],
+              },
+              google: {
+                families: [
+                  'Open Sans Condensed:700',
+                  'Open Sans:300italic,400italic,700italic,300,400,700',
+                  'Noto Serif:400italic,700italic,400,700',
+                  'Fira Mono:400'
+                ]
+              },
+              classes: false,
+              events: false,
+              timeout: 1000
+            });
+        </script>
+
+
+    </head>
+    <body >
+        <div class="simple-banner">
+            <img src="https://opensearch.org/assets/img/opensearch-logo-themed.svg">
+        </div>
+        <h1>OPN305 OpenSearch: Securing your OpenSearch Data</h1>
+        <hr />
+        <p>Today’s builder’s session will leverage <a href="https://www.gitpod.io/">Gitpod</a> (or Docker Compose, if you wish) to launch a container instance that hosts a single node of an <a href="https://opensearch.org/docs/latest/opensearch/index/">OpenSearch</a> cluster coupled with <a href="https://opensearch.org/docs/latest/dashboards/index/">OpenSearch Dashboards</a>. The container image comes preinstalled with multiple plugins from the <a href="https://opensearch.org/">OpenSearch project</a>. One of those plugins is the <a href="https://opensearch.org/docs/latest/security-plugin/index/">Security plugin</a>. The session will focus specifically on the security plugin and how you can leverage the plugin for fine grained access controls on your indexes.</p>
+
+<h2 id="tasks">Tasks</h2>
+
+<p>The builder’s session is divided into specific tasks to help you understand how you can leverage the security plugin to help control the scope of data and the operations that one user or group can perform on your data in your cluster. Many customers find that the fine grained access controls for the plugin can give customers a mechanism that ensures data access is scoped to the desired users. The plugin includes integrations with SAML providers and other authentication sources and it also has a local user database. This session focuses on the provisioning of a local user database to simulate entitlements such as those that are normally implemented in production deployments. You will perform the following activities with these instructions and you will have an OpenSearch person at your table to help you through any issues that may arise while going through these instructions. The task are broken down into the following actions:</p>
+
+<ol>
+  <li>Get setup and create the cluster</li>
+  <li>Load data into the cluster using Python scripts and other Linux tools like <code class="language-plaintext highlighter-rouge">wget</code></li>
+  <li>Create users in the local user database with basic authentication</li>
+  <li>Configure audit logging so you can see the actions of your users and verify compliance</li>
+  <li>Configure roles at the index level and the document and field levels</li>
+  <li>Assign the roles to users created in basic authentication</li>
+  <li>Exercise queries in OpenSearch Dashboards to view the data and the effects of the role
+assignments for particular users</li>
+</ol>
+
+<h2 id="lets-create-the-cluster">Let’s create the cluster!</h2>
+
+<p>Today’s session will leverage <a href="https://www.gitpod.io/">Gitpod</a> or <a href="https://docs.docker.com/compose/">Docker Compose</a> to launch a container instance that hosts a single node of an <a href="https://opensearch.org/docs/latest/opensearch/index/">OpenSearch</a> cluster coupled with <a href="https://opensearch.org/docs/latest/opensearch/index/">OpenSearch Dashboards</a>. The container image comes preinstalled with multiple plugins from the <a href="https://opensearch.org/">OpenSearch project</a>. One of those plugins is the <a href="https://opensearch.org/docs/latest/security-plugin/index/">Security plugin</a>. The session will focus specifically on this plugin and how you can leverage the plugin for fine grained access controls on your indexes.</p>
+
+<h3 id="starting-the-cluster-with-gitpod">Starting the cluster with Gitpod</h3>
+
+<p class="gitpod-hidden">Click on the “Open in Gitpod” button below and it will launch an instance of OpenSearch in your browser account.</p>
+
+<p class="gitpod-hidden"><a href="https://gitpod.io/#https://github.com/opensearch-project/project-website/tree/opn305-demo"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod" /></a></p>
+
+<p class="gitpod-hidden">Once you click on the button, the container will launch in Gitpod. You should observe the following as
+the Gitpod environment spins up:</p>
+
+<p><img src="/assets/media/tutorials/opn305/gitpod-pull.png" alt="GitPod Loading" class="img-fluid gitpod-hidden" /></p>
+
+<p class="gitpod-hidden">Be patient while the container launches. You will see these instructions come up in the preview window on top and terminal on the bottom:</p>
+
+<p><img src="/assets/media/tutorials/opn305/gitpod-layout.png" alt="GitPod Loading" class="img-fluid gitpod-hidden" /></p>
+
+<p class="gitpod-visible">Looks like you’re running in GitPod - here is the status of OpenSearch Dashboards:</p>
+
+<p class="gitpod-hidden">When this document is viewed in Gitpod, it will indicate when OpenSearch Dashboards is ready for use.</p>
+
+<p class="gitpod-visible gitpod-dashboards-ready-hidden">🛑 Please wait while OpenSearch Dashboards is loading. This may take a few moments.</p>
+
+<p class="gitpod-visible gitpod-dashboards-ready-visible">✅ OpenSearch Dashboards is ready, you can proceed to the next step.</p>
+
+<p class="gitpod-visible gitpod-dashboards-ready-visible">Now, let’s launch OpenSearch Dashboards. Right click on the link below and <em>open it in a new window</em>:</p>
+
+<p><img src="/assets/media/tutorials/opn305/open-in-new-window.png" alt="GitPod Loading" class="img-fluid gitpod-visible gitpod-dashboards-ready-visible" /></p>
+
+<p class="gitpod-visible gitpod-dashboards-ready-visible">➡️ <a href="http://localhost:5601/" class="gitpod-replace-port" data-port="5601">Launch OpenSearch Dashboards</a>.</p>
+
+<h3 class="gitpod-hidden" id="starting-the-cluster-with-docker-compose">Starting the cluster with Docker Compose</h3>
+
+<p class="gitpod-hidden">If you are using <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a> directly on your machine, keep in mind that this will download several hundred megabytes of container images before you can begin, so it’s suggested that you spin up a cloud instance with Docker installed or use Gitpod as mentioned above, especially if you are on an unreliable connection.</p>
+
+<ol class="gitpod-hidden">
+  <li>Setup your Docker host environment
+    <ul>
+      <li>macOS &amp; Windows: In Docker Preferences &gt; Resources, set RAM to at least 4 GB.</li>
+      <li>Linux: Ensure vm.max_map_count is set to at least 262144 as per the documentation.</li>
+    </ul>
+  </li>
+  <li>
+    <p>In a terminal window, run download the Docker compose file:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">wget https://raw.githubusercontent.com/opensearch-project/project-website/opn305-demo/_demo/docker-compose.yml</code></p>
+  </li>
+  <li>
+    <p>In a terminal window, start the cluster by running:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">docker-compose up</code></p>
+  </li>
+  <li>Be patient while everything starts up</li>
+  <li>Navigate to <code class="language-plaintext highlighter-rouge">http://localhost:5601/</code> (or the address/hostname of your instance) for OpenSearch Dashboards in a web browser. This may take a few moments to full be ready.</li>
+</ol>
+
+<p class="gitpod-hidden">Once the container has started up, you will observe an event that states “http server running at
+http://0:5601”. Port 5601 is where your OpenSearch dashboard is listening for requests.</p>
+
+<h2 id="log-into-opensearch-dashboards">Log into OpenSearch Dashboards</h2>
+
+<p>You should see a sign on screen for OpenSearch Dashboards. The user name is <code class="language-plaintext highlighter-rouge">admin</code> and the password
+is <code class="language-plaintext highlighter-rouge">admin</code> for this image. Keep in mind, this password is only for demonstration purposes and you should
+create passwords that are complex and not easy to figure out. Your organization will most likely have
+standards and you should adhere to a strong password to keep things secure even in private
+environments.</p>
+
+<p><img src="/assets/media/tutorials/shared/login.jpg" alt="Login to OpenSearch" class="img-fluid" /></p>
+
+<p>Once you have signed in to OpenSearch Dashboards, you will be presented with the following screen:</p>
+
+<p><img src="/assets/media/tutorials/opn305/add-your-data.png" alt="Explore on my own" class="img-fluid" /></p>
+
+<h2 id="select-the-tenant">Select the tenant</h2>
+<p>You will be prompted to select a tenant.  Chose the Global tenant and click on the confirm button.</p>
+
+<p><img src="/assets/media/tutorials/opn305/global.png" alt="Select your tenant" class="img-fluid" /></p>
+
+<h2 id="lets-configure-audit-logs">Let’s configure audit logs!</h2>
+
+<p>Audit logs give you visibility into what users are doing on your cluster and the logs help you understand how you are staying compliant for your organizational requirements.  For this builder’s session, the audit logs are already enabled.  Your focus will be on setting up the types of logs and users that you are going to monitor.  To do this, you need to navigate to the security plugin.  If you look at your console, there is an expand button next to the Home label.  Click on this to get to the menu.</p>
+
+<p><img src="/assets/media/tutorials/opn305/home.png" alt="Home" class="img-fluid" /></p>
+
+<h2 id="navigate-to-the-security-plugin">Navigate to the Security plugin</h2>
+
+<p>The Security plugin manages the audit logs configuration.  Click on the Security option.</p>
+
+<p><img src="/assets/media/tutorials/opn305/select-security.png" alt="Select security" class="img-fluid" /></p>
+
+<h2 id="navigate-to-the-audit-logs-menu">Navigate to the Audit logs menu</h2>
+
+<p>The Audit logs by default will be contained in a series of indexes for this walkthrough.  You can adjust your <code class="language-plaintext highlighter-rouge">opensearch.yml</code> file to change the location.  For demo purposes, this will be in an index.  I suggest using logs instead if you deploy this in any production environment.</p>
+
+<p><img src="/assets/media/tutorials/opn305/audit.png" alt="Select security" class="img-fluid" /></p>
+
+<p>Once you click into General settings you will be presented with a series of options.  In the Layer settings, enable the REST layer logging.  Leave transport layer alone for now.  This REST layer will show you all requests over <code class="language-plaintext highlighter-rouge">GET</code>, <code class="language-plaintext highlighter-rouge">PUT</code>, <code class="language-plaintext highlighter-rouge">POST</code>, etc that come into the cluster.  This can help you see what queries are being run by your users so there is visibility into user activities.  Some settings are already provisioned for you and we are going to verify that certain settings are adjusted as seen below:</p>
+
+<p><img src="/assets/media/tutorials/opn305/layer-settings.png" alt="Layer settings" class="img-fluid" /></p>
+
+<p>In the Attribute settings, enable Request body and Resolve indices.  These two settings show the query body and will show the actual index for which a query was executed.</p>
+
+<p><img src="/assets/media/tutorials/opn305/attribute-settings.png" alt="Attribute Settings" class="img-fluid" /></p>
+
+<p>Save your settings. You will review what gets logged here once you run through all the exercises for the builder’s session.</p>
+
+<p><img src="/assets/media/tutorials/opn305/ignore-settings-save.png" alt="Save" class="img-fluid" /></p>
+
+<p>You won’t need to concern yourself with the compliance settings for this builder’s session.</p>
+
+<h1 id="lets-create-some-data-to-work-with">Lets create some data to work with!</h1>
+
+<h2 id="import-the-movies-data-into-the-opensearch-cluster">Import the movies data into the OpenSearch cluster</h2>
+
+<p>Now, switch over to the terminal.</p>
+
+<p class="gitpod-visible">In Gitpod, this will be in the lower section of your workspace.</p>
+
+<p class="gitpod-hidden">If you are using Docker Compose, you’ll need to use your favourite terminal emulator. If running Docker on your local machine, you can do this directly. If you are running OpenSearch in a cloud instance, you’ll need SSH into that instance.</p>
+
+<h2 id="download-data-and-scripts">Download data and scripts</h2>
+
+<p>The first thing that you are going to do is pull the data set from the location in which it is hosted. You
+will use <code class="language-plaintext highlighter-rouge">wget</code> to pull the dataset to your local storage on the container. Execute the following command
+in your bash shell:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://search-sa-log-solutions.s3-us-east-2.amazonaws.com/fluentd-kinesis-logstash/data/2013Imdb.txt
+</code></pre></div></div>
+
+<p>Observe the following:</p>
+
+<p><img src="/assets/media/tutorials/opn305/wget.png" alt="Get the data" class="img-fluid" /></p>
+
+<p>Next, you need to download two different scripts. The first script will add the index template to the
+cluster by leveraging the <a href="https://opensearch.org/docs/latest/opensearch/index-templates/">_template</a> endpoint. The second script will parse the 2013imdb.txt file that
+you downloaded and it will convert it into <a href="https://opensearch.org/docs/latest/opensearch/rest-api/document-apis/bulk/">_bulk</a> API calls against the cluster.</p>
+
+<p>Go ahead and download the two files with the following commands:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://search-sa-log-solutions.s3-us-east-2.amazonaws.com/builders/put-mappings.py
+wget http://search-sa-log-solutions.s3-us-east-2.amazonaws.com/builders/put-data.py
+</code></pre></div></div>
+
+<p>Observe the following output:</p>
+
+<p><img src="/assets/media/tutorials/opn305/wget_scripts.png" alt="Get the data" class="img-fluid" /></p>
+
+<h2 id="push-the-data-and-mappings-to-the-opensearch-cluster">Push the data and mappings to the OpenSearch cluster</h2>
+
+<p>Verify all three files have been downloaded to your work area.  Use the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls -al
+</code></pre></div></div>
+
+<p><img src="/assets/media/tutorials/opn305/ls-results.jpg" alt="directory list" class="img-fluid" /></p>
+
+<p>Now that the scripts and the IMDB data is local for your container, you are going to push mappings and the data using a series of <code class="language-plaintext highlighter-rouge">_bulk</code> API calls.  Since the data is not in the proper format for OpenSearch, you will use a Python script that reads from the file and writes to your cluster.</p>
+
+<h2 id="create-the-index-template-and-mappings-using-the-put_mappingspy-script">Create the index template and mappings using the <code class="language-plaintext highlighter-rouge">put_mappings.py</code> script</h2>
+
+<p>Of the three files you downloaded, one creates an index template used to determine the mappings of the data being added to the cluster for the session.  It also defines sharding strategies and other index level settings.</p>
+
+<p>You will use the <code class="language-plaintext highlighter-rouge">admin</code> user for the initial data seeding.  The <code class="language-plaintext highlighter-rouge">admin</code> user is already associated with the <code class="language-plaintext highlighter-rouge">all_access role</code> on the cluster.  You can verify this in OpenSearch Dashboards in the Security plugin.  The cluster is secured with basic authentication and only authenticated and authorized users can interact with the OpenSearch cluster.  For example, if you execute the <code class="language-plaintext highlighter-rouge">put_mappings</code> script with an invalid user, you will get an HTTP code of <code class="language-plaintext highlighter-rouge">401</code> which means the user either does not exist or the user lacks credentials to interact with the APIs.  Run the following command for a non-existent user:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python put-mappings.py --endpoint localhost:9200 --username john --password jinglehiemer
+</code></pre></div></div>
+
+<p>The Python code is calling the OpenSearch cluster using invalid credentials.  And it will fail as seen below:</p>
+
+<p><img src="/assets/media/tutorials/opn305/401-john.png" alt="401 Error" class="img-fluid" /></p>
+
+<p>Using the <code class="language-plaintext highlighter-rouge">admin</code> user, lets get the template installed with the appropriate credentials.  Execute the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python put-mappings.py --endpoint localhost:9200 --username admin --password admin
+</code></pre></div></div>
+
+<p>Observe a successful HTTP 200 code:</p>
+
+<p><img src="/assets/media/tutorials/opn305/200-admin.png" alt="200 Success" class="img-fluid" /></p>
+
+<p>You can verify the template is in the cluster by navigating to Dev Tools in OpenSearch Dashboards.  If you are not already logged into the OpenSearch Dashboards, log in and navigate to Dev Tools.  The home page has a breadcrumb that you can follow.</p>
+
+<p><img src="/assets/media/tutorials/opn305/devtools.png" alt="200 Success" class="img-fluid" /></p>
+
+<p>Once you have clicked on the Dev Tools link, you will be presented with a command line, auto complete, editor that enables you to interact with all the APIs on the cluster as long as you have permissions as defined in the Role Mappings.  Type in the following command and press the play button (click to send request) as seen in the image below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET _template/movies_template
+</code></pre></div></div>
+
+<p><img src="/assets/media/tutorials/opn305/template.png" alt="200 Success" class="img-fluid" /></p>
+
+<p>So now you have a template for the data you will ingest using the next command.  This data will be used to show you have to control access to data in an index on the OpenSearch cluster.</p>
+
+<h2 id="load-the-imdb-data-into-the-cluster-using-the-put_datapy-script">Load the IMDB data into the cluster using the <code class="language-plaintext highlighter-rouge">put_data.py</code> script</h2>
+
+<p>Another file you uploaded is a Python script that loads data into the cluster.  It bundles the data after parsing the file and sends it to the cluster using the <code class="language-plaintext highlighter-rouge">_bulk</code> API.  The <code class="language-plaintext highlighter-rouge">_bulk</code> API is the most efficient way to add data to an index at scale.  Execute the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python put-data.py --endpoint localhost:9200 --username admin --password admin
+</code></pre></div></div>
+
+<p><img src="/assets/media/tutorials/opn305/put-data.png" alt="200 Success" class="img-fluid" /></p>
+
+<p>Navigate to OpenSearch Dashboards and in Dev Tools, execute the following command and observe the output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET _cat/indices
+</code></pre></div></div>
+
+<p><img src="/assets/media/tutorials/opn305/cat_indices.png" alt="_cat/indicies" class="img-fluid" /></p>
+
+<p>Now run a query to grab the first 5 documents.  We will use this output to compare how all access permissions compare to limited access permissions.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET movies/_search?size=5
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": ["title","directors","actors","genres"]
+}
+</code></pre></div></div>
+
+<p>Observe the following output:</p>
+
+<p><img src="/assets/media/tutorials/opn305/search-size-5.png" alt="search size 5" class="img-fluid" /></p>
+
+<p>At this point, you have data to query and you now have data to demonstrate how to lock that data down.  Let’s prepare the data just a little bit more.  Let’s split the data into to indexes using a <a href="https://opensearch.org/docs/latest/opensearch/rest-api/document-apis/reindex/">reindex</a> API and a <a href="https://opensearch.org/docs/latest/opensearch/rest-api/document-apis/delete-by-query/">delete_by_query</a>. Go back to Dev Tools and issue the following request:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST _reindex
+{
+  "source": {
+    "index": "movies",
+    "query": {
+      "match": {
+        "genres": "comedy"
+      }
+    }
+  },
+  "dest": {
+    "index": "movies_subset"
+  }
+}
+</code></pre></div></div>
+
+<p>Observe the following:</p>
+
+<p><img src="/assets/media/tutorials/opn305/reindex.png" alt="reindex" class="img-fluid" /></p>
+
+<p>Clean up the transferred data from the movies index so we have separated indexes to show fine grained access controls.  Issue the following request:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST movies/_delete_by_query
+{
+  "query": {
+    "match": {
+      "genres": "comedy"
+    }
+  }
+}
+</code></pre></div></div>
+
+<p>Observe the following behavior:</p>
+
+<p><img src="/assets/media/tutorials/opn305/delete-query.png" alt="reindex" class="img-fluid" /></p>
+
+<p>Now we have two different indexes for which we can apply fine grained access controls at the index, document and field levels.  With the data, you can now setup the permissions for the users you are going to create next.</p>
+
+<h2 id="lets-create-some-users">Let’s create some users!</h2>
+
+<p>Once you are signed in on the cluster, you should see the following screen. Navigate to the Security
+plugin.</p>
+
+<p><img src="/assets/media/tutorials/opn305/create_users.png" alt="create users" class="img-fluid" /></p>
+
+<p>For our session on security, lets lay a solid foundation for entitlements; otherwise known as permissions or roles that have permissions to do things on a cluster.  You create these users so that you, as an admin, can monitor behaviours and ensure that users only have the permissions they need.  Audit logs help you verify the permissions you create are performing as intended.  The role of an admin user typically is limited in the fact that the admin user can issue entitlements and revoke them.  Outside of that, admin users should never be used for programmatic access outside of the scope of entitlements as a best practice.</p>
+
+<p>You are going to create the following users:</p>
+
+<ol>
+  <li>A read only limited access user assigned to one index – this user can only read data on a specific
+index and the user can see all fields in the documents.</li>
+  <li>A read only document level and field level security user – this user has access to the same single
+index the limited access user has and the user is further limited by specific documents matching
+a specific genre of movies. The user will not have access to the actors field in the movies index
+that you will create shortly.</li>
+</ol>
+
+<p>Once you click on the Security link, you should see the following page. Navigate to the ‘Internal users’
+link found on the left hand side of the browser window and click on the link.</p>
+
+<p><img src="/assets/media/tutorials/opn305/security_navigate_internal_users.png" alt="internal users" class="img-fluid" /></p>
+
+<h2 id="create-the-read-only-index-level-user">Create the read only index level user</h2>
+
+<p>Create a user called <code class="language-plaintext highlighter-rouge">read_only_index_level</code> user with a password of <code class="language-plaintext highlighter-rouge">pa$$word</code>. Scroll to the bottom of the form, leave the other fields alone for now. Do not map them.</p>
+
+<p><img src="/assets/media/tutorials/opn305/read_only_index_level.png" alt="read_only_index_level user" class="img-fluid" /></p>
+
+<p>Scroll down and click the Create button.</p>
+
+<p><img src="/assets/media/tutorials/opn305/create-user.png" alt="create user" class="img-fluid" /></p>
+
+<p>Observe user is created.</p>
+
+<p><img src="/assets/media/tutorials/opn305/observe-user-created.png" alt="Observe" class="img-fluid" /></p>
+
+<h2 id="create-the-read-only-document-level-field-level-user">Create the read only document level field level user</h2>
+
+<p>Next, you are going to exercise the APIs for OpenSearch security plugin and add a user through the command line.  Many organizations automate user mappings and provisioning of users.  Understanding that you can use the APIs to do this work will help with your automation needs.</p>
+
+<p>Create a user called <code class="language-plaintext highlighter-rouge">read_only_dls_fls</code> user using the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XPUT https://localhost:9200/_opendistro/_security/api/internalusers/read_only_dls_fls -u admin:admin -k -H 'Content-Type: application/json' -d '{"password":"pa$$w0rd"}'
+</code></pre></div></div>
+
+<p>It should respond back with <code class="language-plaintext highlighter-rouge">{"status":"CREATED","message":"'read_only_dls_fls' created."}</code></p>
+
+<p>Observe the following output:</p>
+
+<p><img src="/assets/media/tutorials/opn305/read_only_dls_fls-observe.png" alt="Observe status created" class="img-fluid" /></p>
+
+<h2 id="observe-two-users-are-created">Observe two users are created</h2>
+
+<p>In the overview, you should see two users created.</p>
+
+<p><img src="/assets/media/tutorials/opn305/two-users.png" alt="Observe" class="img-fluid" /></p>
+
+<h2 id="lets-create-some-roles">Let’s create some roles!</h2>
+
+<p>Without a role assignment, a user is not able to do anything on the cluster.  To prove this point, logout of your OpenSearch Dashboards and log in as the <code class="language-plaintext highlighter-rouge">read_only_index_level</code> user.</p>
+
+<p><img src="/assets/media/tutorials/opn305/read-only-login.png" alt="Read only login" class="img-fluid" /></p>
+
+<p>Navigate to the Dev Tools.</p>
+
+<p><img src="/assets/media/tutorials/opn305/devtools.png" alt="Read only login" class="img-fluid" /></p>
+
+<p>You will be presented with a preformed query.  Change add the movies index to the query:</p>
+
+<p><img src="/assets/media/tutorials/opn305/preformed-query.png" alt="Preformed Query" class="img-fluid" /></p>
+
+<p>When you execute the query by clicking the play button (Click to send request), you will see that this user has no permissions to query the movies index.  Let’s go ahead and give that user minimal permissions to execute this query.</p>
+
+<h2 id="navigate-to-the-security-plugin-and-click-on-the-roles-menu">Navigate to the Security plugin and click on the roles menu</h2>
+
+<p>Make sure you <strong>sign out of Dashboards and sign back in as admin</strong>.  Once you have clicked on the ‘Roles’ option, you should see the following screen:</p>
+
+<p><img src="/assets/media/tutorials/opn305/create-role.png" alt="Create Role" class="img-fluid" /></p>
+
+<p>Click on the Create role button.</p>
+
+<h2 id="create-the-read_only_index_level-role">Create the <code class="language-plaintext highlighter-rouge">read_only_index_level</code> role</h2>
+
+<p>Assign the following name “read_only_index_level” to the role in the Create Role form.  Give <code class="language-plaintext highlighter-rouge">cluster_composite_ops_ro</code> permissions to the role.</p>
+
+<p><img src="/assets/media/tutorials/opn305/cluster_composite_ops_ro.png" alt="adding cluster_composite_ops_ro" class="img-fluid" /></p>
+
+<p>Scroll down to Index permissions and add a pattern <code class="language-plaintext highlighter-rouge">mov*</code> for index permissions.  Allow <code class="language-plaintext highlighter-rouge">read</code>, <code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">search</code> permissions.</p>
+
+<p><img src="/assets/media/tutorials/opn305/pattern-read-get.png" alt="adding pattern-read-get" class="img-fluid" /></p>
+
+<p>Assign the <code class="language-plaintext highlighter-rouge">global_tenant</code> in Tenant permissions and create the role by clicking the Create button at the bottom right of the form.</p>
+
+<p><img src="/assets/media/tutorials/opn305/global_tenant.png" alt="Global Tennant" class="img-fluid" /></p>
+
+<p>Observe the role gets created.</p>
+
+<p><img src="/assets/media/tutorials/opn305/observe-roles.png" alt="Observe Roles" class="img-fluid" /></p>
+
+<p>Navigate back to the ‘Roles’ overview page and find the newly created role’s breadcrumb.  Click on the link labeled <code class="language-plaintext highlighter-rouge">read_only_index_level</code>.</p>
+
+<p><img src="/assets/media/tutorials/opn305/read_only_index_level-click.png" alt="Click read only index level" class="img-fluid" /></p>
+
+<p>After clicking the link, you will see the following:</p>
+
+<p><img src="/assets/media/tutorials/opn305/map-users.png" alt="To map users" class="img-fluid" /></p>
+
+<p>Click on “Map users” as there should be no users / processes / groups assigned to this role.  Assign the <code class="language-plaintext highlighter-rouge">read_only_index_level</code> user to the <code class="language-plaintext highlighter-rouge">read_only_index_level</code> role.</p>
+
+<p><img src="/assets/media/tutorials/opn305/map2.png" alt="Map users" class="img-fluid" /></p>
+
+<p>Observe the mappings have been updated:</p>
+
+<p><img src="/assets/media/tutorials/opn305/read_only_index_level-observe.png" alt="Observe Map users" class="img-fluid" /></p>
+
+<p>Once you have the role mapped, you can sign out as admin and sign back in as <code class="language-plaintext highlighter-rouge">read_only_index_level</code> user.</p>
+
+<p><img src="/assets/media/tutorials/opn305/logout.png" alt="Log out" class="img-fluid" /></p>
+
+<p>Enter the <code class="language-plaintext highlighter-rouge">read_only_index_level</code> credentials from your prior activities.</p>
+
+<p><img src="/assets/media/tutorials/opn305/read_only_index_level-login.png" alt="Log in" class="img-fluid" /></p>
+
+<p>Once you have signed in, navigate to Dev Tools and issue the following query:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET movies/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+</code></pre></div></div>
+
+<p>Observe that you are able to query the indexes that are mapped.  Keep in mind, you mapped this user to a pattern.  That means you will be able to read any indexes that begin with “mov”.</p>
+
+<p><img src="/assets/media/tutorials/opn305/search-read_only.png" alt="Search with read_only" class="img-fluid" /></p>
+
+<p>Before you test the other index, grab the document ID from the first document that shows up in your results.  Cut and paste that <code class="language-plaintext highlighter-rouge">_id</code> field into the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE movies/_doc/&lt;your_pasted_id&gt;
+</code></pre></div></div>
+
+<p>Issue that command in Dev Tools and observe that you have no permissions to delete the document.  Feel free to play with other commands to test the entitlements.  As you can see, you will not be able to delete any documents with the current permissions.</p>
+
+<p><img src="/assets/media/tutorials/opn305/delete-root_cause.png" alt="Delete with root_cause error" class="img-fluid" /></p>
+
+<p>Repeat this exercise for the <code class="language-plaintext highlighter-rouge">movies_subset</code> index.  You should observe similar behaviors. Next, you are going to narrow the scope for the <code class="language-plaintext highlighter-rouge">read_only_dls_fls</code> user.</p>
+
+<h2 id="create-the-read_only_dls_fls_role-role">Create the <code class="language-plaintext highlighter-rouge">read_only_dls_fls_role</code> role</h2>
+
+<p>Next, you are going to work with document and field level permissions.  This part of the exercise will leverage scripting so that you can see how to provision roles and role mapping over APIs.  The role will have the following properties:</p>
+
+<ul>
+  <li>Limit the scope to only the <code class="language-plaintext highlighter-rouge">movies_subset</code> index (index level filtering)</li>
+  <li>Further narrow the scope to documents in that index that match only the genre “Fantasy” (document level filtering)</li>
+  <li>Mask the directors field in the results (field level anonymization)</li>
+  <li>Remove actors from the results (field level elimination)</li>
+</ul>
+
+<p>Go to the command line in bash and execute the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XPUT https://localhost:9200/_opendistro/_security/api/roles/read_only_dls_fls_role -u admin:admin -k -H 'Content-Type: application/json' -d '{"cluster_permissions":["cluster_composite_ops_ro"],"index_permissions":[{"index_patterns":["movies_subset"],"dls":"{\"bool\":{\"must\": {\"match\": {\"genres\": \"Fantasy\"}}}}","fls":["~actors"],"masked_fields":["directors"],"allowed_actions":["read","get","search"]}],"tenant_permissions":[{"tenant_patterns":["global_tenant"],"allowed_actions":["kibana_all_read"]}]}'
+</code></pre></div></div>
+
+<p>Observe the role gets created:</p>
+
+<p><img src="/assets/media/tutorials/opn305/read_only_dls_fls_role-observe.png" alt="command result" class="img-fluid" /></p>
+
+<p>Now you need to map the role to the user.  Leveraging the role mapping API, issue the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XPUT https://localhost:9200/_opendistro/_security/api/rolesmapping/read_only_dls_fls_role -u admin:admin -k -H 'Content-Type: application/json' -d '{"backend_roles" :[],"hosts" : [], "users" : [ "read_only_dls_fls" ]}'
+</code></pre></div></div>
+
+<p>Once the command responds with success, query the <code class="language-plaintext highlighter-rouge">rolesmapping</code> API to view the final set of mappings.  There should be only one user.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XGET https://localhost:9200/_opendistro/_security/api/rolesmapping/read_only_dls_fls_role -u admin:admin -k
+</code></pre></div></div>
+
+<p>Observe the results:</p>
+
+<p><img src="/assets/media/tutorials/opn305/curl-results.png" alt="two command result" class="img-fluid" /></p>
+
+<p>At this point in time you now have two new users on the cluster that are mapped to distinct roles that limit the scope of what each user can perform.  The entitlements go from wide (index level only) to narrow (document and field level permissions).</p>
+
+<h2 id="lets-setup-the-tests-and-assert-the-entitlements">Let’s setup the tests and assert the entitlements!</h2>
+
+<p>The remainder of this exercise will have you issue commands from bash that are queries against the <code class="language-plaintext highlighter-rouge">movies</code> and <code class="language-plaintext highlighter-rouge">movies_subset</code> indexes.  You will also observe that you cannot query other indexes.</p>
+
+<h3 id="create-another-index-that-does-not-fall-under-the-patterns-specified-for-the-read-only-users">Create another index that does not fall under the patterns specified for the read only users</h3>
+
+<p>Let’s create yet another index that just refers to drama genres. As the admin user, issue the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XPOST https://localhost:9200/_reindex -u admin:admin -k -H 'Content-Type: application/json' -d '{"source":{"index": "movies","query": {"match": {"genres": "Drama"}}},"dest": {"index": "shows"}}'
+</code></pre></div></div>
+
+<p>Observe the results:</p>
+
+<p><img src="/assets/media/tutorials/opn305/reindex_results.png" alt="reindex results" class="img-fluid" /></p>
+
+<h3 id="verify-only-admin-user-can-query-shows-index">Verify only admin user can query <code class="language-plaintext highlighter-rouge">shows</code> index</h3>
+
+<p>Issue the following command in bash:</p>
+
+<h4 id="as-admin-user">As admin user</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XGET https://localhost:9200/shows/_search?size=1\&amp;pretty=true\&amp;filter_path=hits -u admin:admin -k -H 'Content-Type: application/json' -d '{"query": {"match_all": {}},"_source": ["title","directors","actors","genres"]}'
+</code></pre></div></div>
+
+<p>Observe success:</p>
+
+<p><img src="/assets/media/tutorials/opn305/shows-index-observe.png" alt="results of show query" class="img-fluid" /></p>
+
+<h3 id="as-read_only_index_level-user">As <code class="language-plaintext highlighter-rouge">read_only_index_level</code> user</h3>
+
+<p>Issue the following command in bash:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XGET https://localhost:9200/shows/_search?size=1\&amp;pretty=true\&amp;filter_path=hits -u read_only_index_level:pa\$\$w0rd -k -H 'Content-Type: application/json' -d '{"query": {"match_all": {}},"_source": ["title","directors","actors","genres"]}'
+</code></pre></div></div>
+
+<p>Observe that the user has no permissions for this index which is in line with the settings you allowed in the role for <code class="language-plaintext highlighter-rouge">read_only_index_level_role</code> that gave access to <code class="language-plaintext highlighter-rouge">movies</code> and <code class="language-plaintext highlighter-rouge">movies_subset</code> indexes.</p>
+
+<p><img src="/assets/media/tutorials/opn305/query-as-read-only.png" alt="results of show query - read only" class="img-fluid" /></p>
+
+<h3 id="as-read_only_dls_fls-user">As <code class="language-plaintext highlighter-rouge">read_only_dls_fls</code> user</h3>
+
+<p>Issue the following command in bash:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XGET https://localhost:9200/shows/_search?size=1\&amp;pretty=true\&amp;filter_path=hits -u read_only_dls_fls:pa\$\$w0rd -k -H 'Content-Type: application/json' -d '{"query": {"match_all": {}},"_source": ["title","directors","actors","genres"]}'
+</code></pre></div></div>
+
+<p>Observe that the user has no permissions for this index which is in line with the settings you allowed in the role for <code class="language-plaintext highlighter-rouge">read_only_dls_fls_role</code> that gave access to <code class="language-plaintext highlighter-rouge">movies_subset</code> index.</p>
+
+<p><img src="/assets/media/tutorials/opn305/read_only_dls_fls_role-access.png" alt="results of show query - read only" class="img-fluid" /></p>
+
+<h3 id="shows-index-summary"><code class="language-plaintext highlighter-rouge">shows</code> index summary</h3>
+
+<p>Overall, you have proven that at the index level, both read only users have no access to the shows index.  This is because you specified that each read_only* user has a narrow scope of access that does not include the <code class="language-plaintext highlighter-rouge">shows</code> index.</p>
+
+<h2 id="verify-the-read_only-users-access-against-the-movies-index">Verify the read_only* user’s access against the “movies” index</h2>
+
+<p>Next, lets pivot to the <code class="language-plaintext highlighter-rouge">movies</code> index.  You know that the admin user has “god” access.  It can create indexes, assign permissions and do other cluster level entitlements and actions.  For the remainder of the builder’s session, you will work with only the read_only* users for observations.</p>
+
+<h3 id="as-read_only_index_level-user-1">As <code class="language-plaintext highlighter-rouge">read_only_index_level</code> user</h3>
+
+<p>Issue the following command in bash:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XGET https://localhost:9200/movies/_search?size=1\&amp;pretty=true\&amp;filter_path=hits -u read_only_index_level:pa\$\$w0rd -k -H 'Content-Type: application/json' -d '{"query": {"match_all": {}},"_source": ["title","directors","actors","genres"]}'
+</code></pre></div></div>
+
+<p>Observe the following behavior.  The user can query.  The index is defined in the role:</p>
+
+<p><img src="/assets/media/tutorials/opn305/read_only_index_query.png" alt="results of show query / filter - read only" class="img-fluid" /></p>
+
+<h3 id="as-read_only_dls_fls-user-1">As <code class="language-plaintext highlighter-rouge">read_only_dls_fls</code> user</h3>
+
+<p>Issue the following command in bash:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XGET https://localhost:9200/movies/_search?size=1\&amp;pretty=true\&amp;filter_path=hits -u read_only_dls_fls:pa\$\$w0rd -k -H 'Content-Type: application/json' -d '{"query": {"match_all": {}},"_source": ["title","directors","actors","genres"]}'
+</code></pre></div></div>
+
+<p>Observe the following behavior.  The user can’t query.  The index is not defined in the role:</p>
+
+<p><img src="/assets/media/tutorials/opn305/unable-to-query.png" alt="unable to query" class="img-fluid" /></p>
+
+<h2 id="verify-the-read_only-users-access-against-the-movies_subset-index">Verify the read_only* user’s access against the <code class="language-plaintext highlighter-rouge">movies_subset</code> index</h2>
+
+<p>Next, lets pivot to the <code class="language-plaintext highlighter-rouge">movies_subset</code> index.  Keep in mind that now, we have entitlements for the <code class="language-plaintext highlighter-rouge">read_only_dls_fls</code> user that state the following:</p>
+
+<ul>
+  <li>Access to only the <code class="language-plaintext highlighter-rouge">movies_subset</code> index</li>
+  <li>Document level permissions to the filter that must match the <code class="language-plaintext highlighter-rouge">genres</code> of ‘Fantasy’</li>
+  <li>Field level masking of the <code class="language-plaintext highlighter-rouge">directors</code> field</li>
+  <li>Exclusion of the <code class="language-plaintext highlighter-rouge">actors</code> field</li>
+</ul>
+
+<h3 id="as-read_only_index_level-user-2">As <code class="language-plaintext highlighter-rouge">read_only_index_level</code> user</h3>
+
+<p>Issue the following command in bash:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XGET https://localhost:9200/movies_subset/_search?size=1\&amp;pretty=true\&amp;filter_path=hits -u read_only_index_level:pa\$\$w0rd -k -H 'Content-Type: application/json' -d '{"query": {"match": {"title.keyword": "Don Jon"}},"_source": ["title","directors","actors","genres"]}'
+</code></pre></div></div>
+
+<p>Observe the following behavior.  The user can query.  The index is defined in the role and there is no document level security:</p>
+
+<p><img src="/assets/media/tutorials/opn305/can-query.png" alt="able to query" class="img-fluid" /></p>
+
+<h3 id="as-read_only_dls_fls-user-2">As <code class="language-plaintext highlighter-rouge">read_only_dls_fls</code> user</h3>
+
+<p>Issue the following command in bash:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XGET https://localhost:9200/movies_subset/_search?size=1\&amp;pretty=true\&amp;filter_path=hits -u read_only_dls_fls:pa\$\$w0rd -k -H 'Content-Type: application/json' -d '{"query": {"match": {"title.keyword": "Don Jon"}},"_source": ["title","directors","actors","genres"]}'
+</code></pre></div></div>
+
+<p>Observe the following behavior.  The user can’t query documents that match “Don Jon” even though you specifically reindexed documents to the <code class="language-plaintext highlighter-rouge">movies_subset</code> index that match “Comedy”.  Only documents that match genres “Fantasy” are allowed.  Luckily, the <code class="language-plaintext highlighter-rouge">genres</code> field, like the others, can be expressed as an array.  Each movie can be associated with multiple genres.  Let’s see what the results are:</p>
+
+<p><img src="/assets/media/tutorials/opn305/index-no-match.png" alt="indexed but no match" class="img-fluid" /></p>
+
+<p>Nothing is found because the user can only pull back documents matching “Fantasy” in the <code class="language-plaintext highlighter-rouge">genres</code> field.</p>
+
+<h3 id="verify-that-the-read_only_dls_fls-user-can-actually-query-something">Verify that the <code class="language-plaintext highlighter-rouge">read_only_dls_fls</code> user can actually query something</h3>
+
+<p>Issue the following command in bash:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -XGET https://localhost:9200/movies_subset/_search?size=1\&amp;pretty=true\&amp;filter_path=hits -u read_only_dls_fls:pa\$\$w0rd -k -H 'Content-Type: application/json' -d '{"query": {"match_all": {}},"_source": ["title","directors","actors","genres"]}'
+</code></pre></div></div>
+
+<p>Observe that you get data back.  You will see that the <code class="language-plaintext highlighter-rouge">genres</code> field has multiple values (array) and in fact “Fantasy” is in the result set.  There is NO field called <code class="language-plaintext highlighter-rouge">actors</code> and the <code class="language-plaintext highlighter-rouge">directors</code> field has been masked (your result might be different):</p>
+
+<p><img src="/assets/media/tutorials/opn305/directors-masked.png" alt="funny characters in the directors field" class="img-fluid" /></p>
+
+<p>So as the final result indicates, THIS IS THE END 😉.  Have fun!  Keep in mind that the OpenSearch experts are here to assist in your questions.  Thanks so much for your time today!</p>
+
+<p>In summary, you built a set of users with varying permissions.  You have asserted those permissions in fact do work.  The Security plugin uses a variety of authentication sources and basic authentication is just one of those typically used for programmatic access.  Consider SAML or other more secure authentication methods for your activities.</p>
+
+<p>But wait!  How do I validate and audit my users???</p>
+
+<h2 id="navigate-to-the-discover-function-as-admin-user">Navigate to the Discover function as admin user</h2>
+
+<p>Log back in as <code class="language-plaintext highlighter-rouge">admin</code>. Since this is the first index you query, it will force you to create an index pattern.</p>
+
+<p><img src="/assets/media/tutorials/opn305/index-pattern.png" alt="create an index pattern" class="img-fluid" /></p>
+
+<p>Click on the create index pattern.  Type in <code class="language-plaintext highlighter-rouge">security*</code> and click Next step.</p>
+
+<p><img src="/assets/media/tutorials/opn305/security-pattern.png" alt="security pattern" class="img-fluid" /></p>
+
+<p>Select the @timestamp field since this is a time series index and click on the Create index pattern button.</p>
+
+<p><img src="/assets/media/tutorials/opn305/timestamp-field.png" alt="select timestamp field" class="img-fluid" /></p>
+
+<p>Now navigate to the Discover function by invoking the menu on the left side of the Dashboards browser.  In the search bar, type <code class="language-plaintext highlighter-rouge">movies_subset</code>.</p>
+
+<p><img src="/assets/media/tutorials/opn305/discover-moves_subset.png" alt="Discover with moves_subset" class="img-fluid" /></p>
+
+<p>Click around in the results and you will discover a robust set of details about the queries, users and IP addresses from which the queries originated.   This feature gives you the ability to audit what goes on in your cluster.  As stated before, its best to have these logs go to local disk instead of an index as we have setup for this builder’s session.</p>
+
+<h2 id="all-the-commands">All the commands</h2>
+
+<p>If you want to see all the commands used in this tutorial, take a look at <a href="https://opensearch.org/tutorials/opn305-skratchpad_command.txt">the command scratchpad</a>.</p>
+
+<h2 id="stay-connected">Stay Connected!</h2>
+
+<p>Find Kyle on Twitter at <a href="https://twitter.com/stockholmux">@stockholmux</a>, on <a href="https://www.linkedin.com/in/kyle-davis-search/">LinkedIn</a>, or reach out via email at kyledvs@amazon.com</p>
+
+<p>Find Kevin on <a href="https://www.linkedin.com/in/kevinmichaelfallis/">LinkedIn</a>, or reach out via email at kffallis@amazon.com</p>
+
+    </body>
+
+</html>
+

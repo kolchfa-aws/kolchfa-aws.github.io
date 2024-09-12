@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /docs/javadoc*
+Disallow: /javadocs/
+Sitemap: https://kolchfa-aws.github.io/sitemap-index.xml

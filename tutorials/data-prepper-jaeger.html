@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" class="tutorial-layout">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="ROBOTS" content="ALL" />
+        <meta name="MSSmartTagsPreventParsing" content="true" />
+        <meta name="Copyright" content="" />
+        <link rel="stylesheet" href="/assets/css/output.css" >
+        <title> Data Prepper + Jaeger Tutorial and Demo &middot;  OpenSearch</title>
+        <script src="https://opensearch.org/assets/js/lib/jquery-3.6/jquery-3.6.0.min.js"></script>
+        <script src="https://opensearch.org/assets/js/lib/webfontloader/webfontloader.js"></script>
+
+        <script>
+            $( document ).ready(function() {
+                var gitPodStatus = {};
+                // The OpenSearch tutorials in GitPod reveal themselves at a URL that looks like this:
+                // 8000-blah-blah-blah.gitpod.io
+                // so we check the window location starting with 8, this could be more specific
+                // but we really just want to check if we're being served from opensearch.org or not
+                if (window.location.host[0] == '8') {
+                    $('body').addClass('gitpod');
+
+                    // Dashboards has a strange way of making itself avaliable
+                    // there is a script on gitpod that checks for true avaliablity
+                    // then adds an empty file, so we can poll it
+                    gitPodStatus.dashboardsReady = false;
+                    gitPodStatus.checkCount = 0;
+                    // check every 2 seconds, clear if we reach a max or once found
+                    gitPodStatus.dashboardsInterval = setInterval(function() {
+                        // check for 5 minutes
+                        if (gitPodStatus.checkCount >= 150) {
+                            clearInterval(gitPodStatus.dashboardsInterval);
+                        } else {
+                            gitPodStatus.checkCount += 1;
+                        }
+                        jQuery.get('/tutorial/dashboardsready.txt').done(function() { 
+                            clearInterval(gitPodStatus.dashboardsInterval);
+                            $('body').addClass('gitpod-dashboards-ready');
+                        });
+                    }, 2000);
+
+
+
+                    $('a.gitpod-replace-port').each(function() {
+                        var href = $(this).attr('href');
+                        var port = $(this).attr('data-port')
+                        $(this).attr('href','https://'+window.location.host.replace('8000',port)+'/');
+                    });
+
+                    $('code.gitpod-replace-port').each(function() {
+                        var text = $(this).text();
+                        var port = $(this).attr('data-port')
+                        $(this).text('https://'+window.location.host.replace('8000',port)+'/');
+                    });
+
+
+                    $('.gitpod-dashboards').each(function() {
+                        $(this).text('https://'+window.location.host.replace('8000','5601')+'/');
+                    });
+
+                    $('.gitpod-opensearch').each(function() {
+                        $(this).text('https://'+window.location.host.replace('8000','9200')+'/');
+                    });
+                    
+                    let replacementDomain = 'https://opensearch.org';
+                    let replacer = function(attr) {
+                        return function() { 
+                            let hrefValue = $(this).attr(attr); 
+                            if (hrefValue[0] === '/') { 
+                                $(this).attr(attr, replacementDomain + hrefValue); 
+                            }  
+                        }
+                    };
+                    if (location.port !== '4000') {
+                        $('link[rel="stylesheet"]').each(replacer('href'));
+                        $('img').each(replacer('src'));
+                        console.log('not 4000');
+                    }
+                } else {
+                    // not gitpod.
+                }
+            });
+            WebFont.load({
+              custom: {
+                families: ['FontAwesome'],
+              },
+              google: {
+                families: [
+                  'Open Sans Condensed:700',
+                  'Open Sans:300italic,400italic,700italic,300,400,700',
+                  'Noto Serif:400italic,700italic,400,700',
+                  'Fira Mono:400'
+                ]
+              },
+              classes: false,
+              events: false,
+              timeout: 1000
+            });
+        </script>
+
+
+    </head>
+    <body >
+        <div class="simple-banner">
+            <img src="https://opensearch.org/assets/img/opensearch-logo-themed.svg">
+        </div>
+        <h1>Data Prepper + Jaeger Tutorial and Demo</h1>
+        <hr />
+        <p>In this tutorial, you’ll use Data Prepper with Jaeger to demonstrate the ability for OpenSearch and OpenSearch Dashboards to capture and visualize trace data.</p>
+
+<h3 id="1-get-your-demo-environment-ready">1. Get your demo environment ready</h3>
+
+<p class="gitpod-hidden">Launch OpenSearch Dashboards with Docker Compose [todo]</p>
+
+<p class="gitpod-visible gitpod-dashboards-ready-hidden">🛑 Please wait while OpenSearch Dashboards is loading. This may take a few moments.</p>
+
+<p class="gitpod-visible gitpod-dashboards-ready-visible">✅ OpenSearch Dashboards is ready, you can proceed to the next step.</p>
+
+<hr />
+
+<h3 id="2-prepare-opensearch-dashboards-and-the-jaeger-hot-rod-demo">2. Prepare OpenSearch Dashboards and the Jaeger Hot R.O.D. Demo</h3>
+
+<p>This tutorial will use three browser windows. One for this tutorial content, another for OpenSearch Dashboards, and a third for the Jaeger Hot R.O.D. demo.</p>
+
+<p>Point the second browser window at the following URL to launch OpenSearch Dashboards:</p>
+
+<p class="gitpod-visible gitpod-dashboards-ready-hidden">🛑 OpenSearch Dashboards is still loading, URLs will be visible once it is complete.</p>
+
+<p><code class="gitpod-replace-port gitpod-visible gitpod-dashboards-ready-visible" data-port="5601">http://localhost:5601/</code></p>
+
+<p class="gitpod-hidden"><code class="language-plaintext highlighter-rouge">http://localhost:5601/</code></p>
+
+<p>Now, point the third browser window at the following URL to launch the Jaeger Hot R.O.D. demo:</p>
+
+<p class="gitpod-visible gitpod-dashboards-ready-hidden">🛑 OpenSearch Dashboards is still loading, URLs will be visible once it is complete.</p>
+
+<p><code class="gitpod-replace-port gitpod-visible gitpod-dashboards-ready-visible" data-port="8080">http://localhost:8080/</code></p>
+
+<p class="gitpod-hidden"><code class="language-plaintext highlighter-rouge">http://localhost:8080/</code></p>
+
+<p>You should have three windows open like this:</p>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/window-layout.png" alt="Window Layout" class="img-fluid" /></p>
+
+<hr />
+<h3 id="3-login-to-opensearch-dashboards-for-the-first-time">3. Login to OpenSearch Dashboards for the first time</h3>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/login.jpg" alt="Login to OpenSearch Dashboards" class="img-fluid" /></p>
+
+<p>At the login screen, use the following credentials:</p>
+
+<p>Username: <code class="language-plaintext highlighter-rouge">admin</code></p>
+
+<p>Password: <code class="language-plaintext highlighter-rouge">admin</code></p>
+
+<p>Click “Log In”</p>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/welcome.jpg" alt="OpenSearch Dashboards Welcome" class="img-fluid" /></p>
+
+<p>Next, you’ll be presented with the Welcome page. You should click “Explore on my own” since the demo is only using data from the Hot Rod demo.</p>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/tenant.jpg" alt="OpenSearch Dashboards Tenant" class="img-fluid" /></p>
+
+<p>Now you’ll see the tenant selection window. In this tutorial, tenants will not be used, so just select “Global” then click “Confirm”</p>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/home.jpg" alt="OpenSearch Dashboards Tenant" class="img-fluid" /></p>
+
+<p>On the home screen, click the menu button in the upper left to reveal the menu along the left side. Click “Trace Analytics” under the heading “OpenSearch Plugins.”</p>
+
+<hr />
+<h3 id="4-generate-sample-traces-with-the-jaeger-hot-rod-demo-application">4. Generate sample traces with the Jaeger Hot R.O.D. demo application</h3>
+
+<p>Switch to the window that is running the Jaeger Hot R.O.D. demo.</p>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/hotrod.jpg" alt="Hot R.O.D." class="img-fluid" /></p>
+
+<p>Click several times on the customer buttons - even click rapidly. This application will simulate a microservice architecture and will generate trace data that is being read by Data Prepper and stored in OpenSearch.</p>
+
+<hr />
+<h3 id="5-view-the-trace-data-in-opensearch-dashboards">5. View the trace data in OpenSearch Dashboards</h3>
+
+<p>Switch back to OpenSearch Dashboards.</p>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/trace.jpg" alt="OpenSearch Dashboards Trace Analytics" class="img-fluid" /></p>
+
+<p>You’ll see the panels have been populated with some data based on your clicks (if not, click the “Refresh” button on the right). On the top, you have a listing of latency by trace groups, then below you have the service map, trace error rate and trace over time charts. Feel free to explore these panels,</p>
+
+<p>Now, view the traces of any trace group by clicking on the number of traces in the right most column of the “Latency by trace group” panel.</p>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/trace-page.jpg" alt="OpenSearch Dashboards Trace Analytics Page" class="img-fluid" /></p>
+
+<p>This brings you to the traces page where you can click on individual trace IDs. Click on any trace ID from the left most column.</p>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/single-trace.jpg" alt="OpenSearch Dashboards Trace Analytics Single Trace" class="img-fluid" /></p>
+
+<p>This shows the detail for that individual trace. Make sure and look at both the “Time spent by service” bar chart and the “Span” chart to see how this trace moved through the architecture.</p>
+
+<p><img src="/assets/media/tutorials/data-prepper-jaeger/services.jpg" alt="OpenSearch Dashboards Trace Analytics Service" class="img-fluid" /></p>
+
+<p>Go back to the main Trace Analytics panel by selecting “Trace Analytics” in the upper left next to the menu button. Then select “Services” from the left hand menu. Here you can inspect individual services and their performance. Make sure to take a look at the service map and it’s options as well as the span table at the bottom of the page.</p>
+
+<hr />
+<h3 id="what-did-you-learn-and-whats-next">What did you learn and what’s next?</h3>
+
+<p>In this tutorial, you logged into OpenSearch Dashboards, started an application that generated traces and started Data Prepper to read and store those traces and saw how OpenSearch Dashboards presents the trace data for your analysis.</p>
+
+<p>From here you can continue to explore the interface of OpenSearch Dashboards, read the documentation for trace analytics (<code class="language-plaintext highlighter-rouge">https://opensearch.org/docs/latest/monitoring-plugins/trace/index/</code>) or Data Prepper (<code class="language-plaintext highlighter-rouge">https://opensearch.org/docs/latest/monitoring-plugins/trace/data-prepper/</code>).</p>
+
+
+    </body>
+
+</html>
+
