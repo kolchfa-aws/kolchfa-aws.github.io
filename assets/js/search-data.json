@@ -1,0 +1,26 @@
+{"0": {
+    "doc": 404,
+    "title": "Oops, this isn’t the page you’re looking for.",
+    "content": "Maybe our home page or one of the commonly visited pages below will help. If you need further support, please use the feedback feature on the right side of the screen to get in touch. | Quickstart | Installing OpenSearch | OpenSearch Dashboards | Query DSL | API Reference | . ",
+    "url": "https://kolchfa-aws.github.io/staging/404.html#oops-this-isnt-the-page-youre-looking-for",
+    "relUrl": "/404.html#oops-this-isnt-the-page-youre-looking-for"
+  },"1": {
+    "doc": 404,
+    "title": 404,
+    "content": " ",
+    "url": "https://kolchfa-aws.github.io/staging/404.html",
+    "relUrl": "/404.html"
+  },"2": {
+    "doc": "Home",
+    "title": "Home",
+    "content": "OpenSearch Documentation Learn to use OpenSearch, the highly scalable and extensible open-source software suite for search, analytics, observability, and other data-intensive applications. Contribute . OpenSearch and OpenSearch Dashboards . All documentation . Build your OpenSearch solution using core tooling and visualizations. Documentation \u0026#x2192; . Vector search . Use vector database capabilities for more relevant search results. Documentation \u0026#x2192; . Machine learning . Power your applications with machine learning model integration. Documentation \u0026#x2192; . OpenSearch Dashboards . Explore and visualize your data using interactive dashboards. Documentation \u0026#x2192; . Supporting tools . Data Prepper . Filter, mutate, and sample your data for ingestion into OpenSearch. Documentation \u0026#x2192; . Clients . Interact with OpenSearch from your application using language APIs. Documentation \u0026#x2192; . OpenSearch Benchmark . Measure OpenSearch cluster performance metrics. Documentation \u0026#x2192; . Migration Assistant . Migrate to OpenSearch. Documentation \u0026#x2192; . ",
+    "url": "https://kolchfa-aws.github.io/staging/",
+    "relUrl": "/"
+  },"3": {
+    "doc": "OpenSearch Documentation Search Results Page",
+    "title": "OpenSearch Documentation Search Results Page",
+    "content": "OpenSearch Documentation Learn to use OpenSearch, the highly scalable and extensible open-source software suite for search, analytics, observability, and other data-intensive applications. Contribute . ",
+    "url": "https://kolchfa-aws.github.io/staging/search.html",
+    "relUrl": "/search.html"
+  }
+}
