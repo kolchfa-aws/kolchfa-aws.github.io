@@ -6,7 +6,7 @@
       <nav id="site-nav" class="greedy-nav">
         {% unless logo_path == empty %}
           <a class="site-logo" href="{{ '/' | relative_url }}">
-            <img id="site-logo-img" src="/assets/images/header/writing-icon.png" alt="{{ site.masthead_title | default: site.title }}">
+            <img id="site-logo-img" src="/assets/images/header/writing-icon.png" alt="{{ site.masthead_title | default: site.title }}" title="Home">
           </a>
         {% endunless %}
         <a class="site-title" href="{{ '/' | relative_url }}">
