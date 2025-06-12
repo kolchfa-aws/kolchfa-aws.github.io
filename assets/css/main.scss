@@ -678,3 +678,46 @@ section.page__content p img.align-center {
     margin-right: 0.75rem; 
   }
 }
+
+#theme-toggle {
+  padding: 0.5em;
+  margin-left: 0.5em;
+  font-size: 1em;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  #theme-toggle {
+    padding: 0.3em;
+    margin-left: 0.2em;
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .site-logo img {
+    max-height: 1.5rem;
+  }
+}
+
+.masthead__menu {
+  @media screen and (max-width: 600px) {
+    .visible-links {
+      display: flex;
+      flex-wrap: nowrap;
+      margin-left: 0.5em;
+    }
+    
+    .masthead__menu-item {
+      padding: 0.3em;
+    }
+  }
+}
+
+.masthead__inner-wrap {
+  @media screen and (max-width: 600px) {
+    padding: 0.5em;
+  }
+}
