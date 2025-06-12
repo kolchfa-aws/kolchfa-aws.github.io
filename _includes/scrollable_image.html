@@ -1,0 +1,21 @@
+<div class="sync-scroll-wrapper">
+  {% for image in include.images %}
+    <div class="scroll-container {% if include.synced_scroll == true %} synced-scroll{% endif %}">
+        {% if image.caption %}
+          <div class="scroll-caption">
+            <div class="inner-scroll-caption">
+                <a href="{{ image.link }}" target="_blank">
+                {{ image.caption }}<i class="fas fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
+                </a>
+                {% if image.caption2 %}
+                <a href="{{ image.link2 }}" target="_blank">
+                {{ image.caption2 }}<i class="fas fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+            </div>
+          </div>
+        {% endif %}
+        <img src="{{ image.url }}" alt="{{ image.alt }}">
+    </div>
+  {% endfor %}
+</div>

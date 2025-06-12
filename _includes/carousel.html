@@ -1,0 +1,23 @@
+<div class="carousel-container">
+  <div class="carousel-wrapper">
+    {% for image in include.images %}
+      <div class="carousel-slide {% if forloop.first %}active{% endif %}">
+        <div class="carousel-image-container">
+          <img src="{{ image.url }}" alt="{{ image.alt }}">
+          <div class="image-descriptor">{{ image.alt }}</div>
+            <p class="carousel-caption">
+              <a href="{{ image.link }}">
+                Full article<i class="fas fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
+              </a>
+            </p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-arrow carousel-prev" aria-label="Previous image">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <button class="carousel-arrow carousel-next" aria-label="Next image">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+</div>

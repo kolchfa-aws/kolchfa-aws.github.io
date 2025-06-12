@@ -1,0 +1,15 @@
+<div class="linked-card-row">
+  {% for card in include.card_row %}
+  <a href="{{ card.url }}" class="linked-card">
+    <div class="linked-card-heading">
+      <img src="{{ card.icon }}" alt="icon for {{ card.title }}" class="linked-card-icon">
+      <h3 class="linked-card-title">{{ card.title }}</h3>
+    </div>
+    <p class="linked-card-excerpt">
+      {{ card.excerpt | markdownify | strip_newlines | replace: '<p>', '' | replace: '</p>', '' }}
+      <i class="fas fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
+    </p>
+    {% if card.image %}<img class="linked-card-image" src="{{ card.image }}" alt="image for {{ card.title }}" style="background-color: {{ card.color }};" />{% endif %}
+  </a>
+  {% endfor %}
+</div>

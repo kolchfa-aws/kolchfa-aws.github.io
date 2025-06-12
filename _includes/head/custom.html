@@ -1,0 +1,25 @@
+<!-- start custom head snippets -->
+<script>
+  (function() {
+    const skin = localStorage.getItem("skin") || "default";
+    document.documentElement.setAttribute("data-skin", skin);
+  })();
+</script>
+<script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/carousel.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/scroll-sync.js' | relative_url }}"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y3FB9EN9K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9Y3FB9EN9K');
+</script>
+
+<!-- end custom head snippets -->
