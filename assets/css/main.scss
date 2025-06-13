@@ -20,6 +20,7 @@ $periwinkle: #6B80E0;
   --body-color: #fcfcfd;
   --panel-background-l: #eef1fc;
   --panel-background-r: #CBDFF0;
+  --header-background: #e7ebf1;
 }
 
 [data-skin="dark"] {
@@ -30,6 +31,7 @@ $periwinkle: #6B80E0;
   --body-color: #181818;
   --panel-background-l: #1e2a40;
   --panel-background-r: #3c4a63;
+  --header-background: #e7ebf1;
 }
 
 #main {
@@ -545,7 +547,13 @@ body {
   flex-wrap: wrap;
   gap: 1rem;
   max-width: 100%;
-  margin: 2rem auto;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(
+    to right,
+    var(--panel-background-l),
+    var(--panel-background-r),
+  );
 }
 
 .scroll-container {
@@ -566,7 +574,7 @@ body {
 .scroll-caption {
   position: sticky;
   top: 0;
-  background: var(--panel-background-l);
+  background: var(--header-background);
   padding: 0.5rem;
   font-size: 0.875rem;
   z-index: 2;
