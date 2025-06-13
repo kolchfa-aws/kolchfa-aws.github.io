@@ -594,6 +594,11 @@ body {
 @media (max-width: 880px) {
   .scroll-container {
     flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .scroll-container {
     height: 450px;
   }
 }
