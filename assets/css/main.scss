@@ -444,7 +444,6 @@ body {
   top: 50%;
   transform: translateY(-50%);
   background-color: transparent;
-  color: #333;
   border: none;
   font-size: 2rem;
   padding: 0.25rem 0.75rem;
@@ -452,10 +451,20 @@ body {
   border-radius: 0.25rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
   z-index: 10;
+  outline: none;
+  box-shadow: none;
 }
 
+.carousel-arrow:focus,
+.carousel-arrow:active {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+
 .carousel-arrow:hover {
-  background-color: rgba(255, 255, 255, 1);
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -463,7 +472,7 @@ body {
   color: $periwinkle; 
 }
 
-.carousel-arrow:hover i {
+.carousel-arrow i:hover {
   color: $bright-blue; 
 }
 
