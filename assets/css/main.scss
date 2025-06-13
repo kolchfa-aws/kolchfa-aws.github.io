@@ -554,12 +554,14 @@ body {
     var(--panel-background-l),
     var(--panel-background-r),
   );
+  justify-content: center;
 }
 
 .scroll-container {
   flex: 1 1 48%;
   overflow-y: scroll;
   height: 600px;
+  max-width: 500px;
   border: 1px solid var(--card-border);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
@@ -592,8 +594,7 @@ body {
 @media (max-width: 880px) {
   .scroll-container {
     flex: 1 1 100%;
-    height: 300px;
-    overflow-y: auto;
+    height: 450px;
   }
 }
 
