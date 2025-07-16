@@ -1,7 +1,9 @@
 ---
 author_profile: true
 permalink: /about/
-title: About me
+title: "About me"
+description: "Technical writer with 10+ years experience at AWS, documenting OpenSearch. Former software developer with CS Master's degree. Expert in docs-as-code, APIs, and technical content."
+keywords: "technical writer, AWS, OpenSearch, documentation, docs-as-code, API documentation, senior programmer writer"
 layout: splash
 header:
   overlay_color: "#000"

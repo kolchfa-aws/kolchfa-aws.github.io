@@ -1,6 +1,4 @@
 remote_theme: "mmistakes/minimal-mistakes@4.27.1"
-plugins:
-  - jekyll-include-cache
 
 title: "Fanit Kolchina"
 name: "Fanit Kolchina"
@@ -85,11 +83,22 @@ google:
   search_engine_id       : # YOUR_SEARCH_ENGINE_ID
   instant_search         : # false (default), true
 # SEO Related
-google_site_verification :
-bing_site_verification   :
-naver_site_verification  :
-yandex_site_verification :
-baidu_site_verification  :
+
+title: "Fanit Kolchina - Senior Technical Writer & Documentation Expert"
+description: "Senior technical writer specializing in API documentation, SDK guides, and developer content. 10+ years experience at AWS documenting OpenSearch and open-source projects."
+url: "https://yourdomain.com"
+author: "Fanit Kolchina"
+social:
+  name: Fanit Kolchina
+  links:
+    - https://github.com/kolchfa-aws
+
+# Open Graph defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-image.jpg
 
 # Social Sharing
 twitter:
@@ -225,6 +234,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-include-cache
+  - jekyll-seo-tag
 
 # mimic GitHub Pages with --safe
 whitelist:

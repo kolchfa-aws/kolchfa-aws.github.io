@@ -1,4 +1,7 @@
 <!-- start custom head snippets -->
+
+{% seo %}
+
 <script>
   (function() {
     const skin = localStorage.getItem("skin") || "default";
@@ -8,6 +11,7 @@
 <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/carousel.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/scroll-sync.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/contact.js' | relative_url }}"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -22,4 +26,22 @@
   gtag('config', 'G-9Y3FB9EN9K');
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Fanit Kolchina",
+  "jobTitle": "Senior Technical Writer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "AWS"
+  },
+  "description": "Senior technical writer with 10+ years experience specializing in API documentation, SDK guides, and developer content",
+  "url": "https://kolchfa-aws.github.io/",
+  "knowsAbout": ["Technical Writing", "API Documentation", "OpenSearch", "AWS", "Software Development"],
+  "sameAs": [
+    "https://github.com/kolchfa-aws"
+  ]
+}
+</script>
 <!-- end custom head snippets -->

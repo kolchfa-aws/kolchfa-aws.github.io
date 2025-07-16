@@ -2,6 +2,8 @@
 author_profile: false
 permalink: /case-studies/
 title: "Case studies"
+description: "See how I transform technical drafts into user-focused documentation. Case studies showing before/after examples of API docs, information architecture, and content improvement."
+keywords: "technical writing case studies, documentation improvement, information architecture, API documentation examples, content transformation"
 layout: splash
 header:
   overlay_color: "#000"
@@ -9,20 +11,21 @@ header:
   overlay_image: /assets/images/header/blue-pen-short.jpg
 scroll_images:
   - url: /assets/images/case-studies/wa-before.png
-    alt: Before example
+    alt: Screenshot of the original weighted average aggregation documentation before improvements
     caption: "Before"
     link: https://docs.opensearch.org/docs/2.18/aggregations/metric/weighted-avg/
   - url: /assets/images/case-studies/wa-after-2.png
-    alt: After example
+    alt: Screenshot of the updated weighted average aggregation documentation with improvements applied
     caption: "After"
     link: https://docs.opensearch.org/docs/latest/aggregations/metric/weighted-avg/
+
 scroll_images2:
   - url: /assets/images/case-studies/guardrails-before.png
-    alt: Draft
+    alt: Screenshot of the initial draft of the guardrails documentation before editing
     caption: "Initial draft"
     link: https://github.com/opensearch-project/documentation-website/pull/6750/commits/faea53e5557539851eeedaa9c8da142d37ad66fa
   - url: /assets/images/case-studies/guardrails-rendered-after.png
-    alt: Complete documentation
+    alt: Screenshot of the final version of the guardrails documentation after editing and publishing
     caption: "Final draft"
     link: https://github.com/opensearch-project/documentation-website/pull/6750/files#diff-10e039bf0cf35259401a322a99ad8fa61bff3789c41c50efe5604de93c9bf185
     caption2: "Final documentation"

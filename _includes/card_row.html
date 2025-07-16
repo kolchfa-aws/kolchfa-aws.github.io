@@ -9,7 +9,7 @@
       {{ card.excerpt | markdownify | strip_newlines | replace: '<p>', '' | replace: '</p>', '' }}
       <i class="fas fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
     </p>
-    {% if card.image %}<img class="linked-card-image" src="{{ card.image }}" alt="image for {{ card.title }}" style="background-color: {{ card.color }};" />{% endif %}
+    {% if card.image %}<img class="linked-card-image" src="{{ card.image }}" alt="{{ card.alt }}" style="background-color: {{ card.color }};" />{% endif %}
   </a>
   {% endfor %}
 </div>
