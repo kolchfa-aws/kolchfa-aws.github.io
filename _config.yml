@@ -1,8 +1,14 @@
 remote_theme: "mmistakes/minimal-mistakes@4.27.1"
 
-title: "Fanit Kolchina"
+title: "Fanit Kolchina - Senior Technical Writer & Documentation Expert"
 name: "Fanit Kolchina"
-description: "Technical Writer Portfolio"
+description: "Senior technical writer specializing in API documentation, SDK guides, and developer content. 10+ years experience at AWS documenting OpenSearch and open-source projects."
+url: "https://kolchfa-aws.github.io"
+author: "Fanit Kolchina"
+social:
+  name: Fanit Kolchina
+  links:
+    - https://github.com/kolchfa-aws
 
 # Site Author
 author:
@@ -23,8 +29,8 @@ title_separator          : "|"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Fanit Kolchina"
 description              : "Technical writer with software development background. Documentation portfolio showcasing API docs, user guides, and open-source contributions."
-url                      : "" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl                  : # the subpath of your site, e.g. "/blog"
+url                      : "https://kolchfa-aws.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : "/assets/images/writing-icon.png"
@@ -83,16 +89,6 @@ google:
   search_engine_id       : # YOUR_SEARCH_ENGINE_ID
   instant_search         : # false (default), true
 # SEO Related
-
-title: "Fanit Kolchina - Senior Technical Writer & Documentation Expert"
-description: "Senior technical writer specializing in API documentation, SDK guides, and developer content. 10+ years experience at AWS documenting OpenSearch and open-source projects."
-url: "https://yourdomain.com"
-author: "Fanit Kolchina"
-social:
-  name: Fanit Kolchina
-  links:
-    - https://github.com/kolchfa-aws
-
 # Open Graph defaults
 defaults:
   - scope:
