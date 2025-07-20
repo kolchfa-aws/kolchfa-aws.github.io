@@ -1,6 +1,6 @@
 ---
 title: "Fanit Kolchina"
-description: "Senior technical writer with 10+ years experience at AWS documenting OpenSearch. Former software developer specializing in API documentation, SDK guides, and AI/ML content creation."
+description: "Senior technical writer with 10+ years experience and former software developer. Specializing in API documentation, SDK guides, and AI/ML content creation."
 keywords: "technical writer, AWS, OpenSearch documentation, API documentation, SDK documentation, developer documentation, AI ML content, technical writing services"
 layout: splash
 header:

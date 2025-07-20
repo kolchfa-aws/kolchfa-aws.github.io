@@ -316,6 +316,7 @@ DEPENDENCIES
   jekyll
   jekyll-data
   jekyll-include-cache
+  jekyll-sitemap
   minimal-mistakes-jekyll
 
 BUNDLED WITH
