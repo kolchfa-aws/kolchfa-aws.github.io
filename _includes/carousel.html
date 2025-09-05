@@ -4,7 +4,7 @@
       <div class="carousel-slide {% if forloop.first %}active{% endif %}">
         <div class="carousel-image-container">
           <img src="{{ image.url }}" alt="{{ image.alt }}">
-          <div class="image-descriptor">{{ image.alt }}</div>
+          <div class="image-descriptor">{{ image.description }}</div>
             <p class="carousel-caption">
               <a href="{{ image.link }}">
                 Full article<i class="fas fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>

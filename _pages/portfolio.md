@@ -77,18 +77,23 @@ card_row:
     color: "#C4C3D0"
 carousel_images:
   - url: /assets/images/portfolio/carousel/vector-search.png
-    alt: Screenshot of vector search getting started guide in OpenSearch documentation
+    description: AI/ML tutorial
+    alt: Vector search getting started guide in OpenSearch documentation
     link: https://docs.opensearch.org/docs/latest/vector-search/getting-started/index/
   - url: /assets/images/portfolio/carousel/controller-api.png
+    description: API documentation
     alt: API reference page showing controller API creation in OpenSearch ML Commons
     link: https://docs.opensearch.org/docs/latest/ml-commons-plugin/api/controller-apis/create-controller/
   - url: /assets/images/portfolio/carousel/text-analysis.png
+    description: Explanation documentation
     alt: Documentation guide on text analysis and analyzers in OpenSearch
     link: https://docs.opensearch.org/docs/latest/analyzers/
   - url: /assets/images/portfolio/carousel/regex.png
+    description: Reference documentation
     alt: Regular expression syntax reference documentation page for OpenSearch Query DSL
     link: https://docs.opensearch.org/docs/latest/query-dsl/regex-syntax/
   - url: /assets/images/portfolio/carousel/agent-blog.png
+    description: Technical blog
     alt: Blog post on intelligent troubleshooting using the Plan-Execute-Reflect agent in OpenSearch 3.0
     link: https://opensearch.org/blog/intelligent-troubleshooting-using-opensearch-3-0s-plan-execute-reflect-agent/
 ---
